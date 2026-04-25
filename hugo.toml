@@ -1,7 +1,7 @@
 baseURL = 'https://www.kxops.com'
 locale = 'en-us'
 title = 'kxops'
-theme = 'hugo-book'
+theme = 'PaperMod'
 
 [[menu.main]]        
   name = "首页"

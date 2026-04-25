@@ -6,16 +6,8 @@
     <description>Recent content on kxops</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2026 22:52:45 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2026 22:52:15 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>关于本站</title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Sat, 25 Apr 2026 22:52:45 +0800</pubDate>
-      <guid>http://localhost:1313/about/</guid>
-      <description>&lt;h5&gt;&lt;/h5&gt;
-&lt;p&gt;关注运维自动化&lt;/p&gt;</description>
-    </item>
     <item>
       <title>Helloworld</title>
       <link>http://localhost:1313/posts/helloworld/</link>

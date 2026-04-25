@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://kxops.com/posts/helloworld/</loc>
+    <loc>kxops-com.vercel.app/posts/helloworld/</loc>
     <lastmod>2026-04-25T22:52:15+08:00</lastmod>
   </url><url>
-    <loc>https://kxops.com/</loc>
+    <loc>kxops-com.vercel.app/</loc>
     <lastmod>2026-04-25T22:52:15+08:00</lastmod>
   </url><url>
-    <loc>https://kxops.com/posts/</loc>
+    <loc>kxops-com.vercel.app/posts/</loc>
     <lastmod>2026-04-25T22:52:15+08:00</lastmod>
   </url><url>
-    <loc>https://kxops.com/categories/</loc>
+    <loc>kxops-com.vercel.app/categories/</loc>
   </url><url>
-    <loc>https://kxops.com/tags/</loc>
+    <loc>kxops-com.vercel.app/tags/</loc>
   </url>
 </urlset>

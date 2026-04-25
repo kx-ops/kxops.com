@@ -27,4 +27,6 @@ theme = 'PaperMod'
   name = "关于"
   weight = 40
   identifier = "about"
-  url = "/about/"   
+  url = "/about/"  
+  
+   

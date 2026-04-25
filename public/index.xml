@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>kxops</title>
-    <link>http://localhost:1313/</link>
+    <link>https://kxops.com/</link>
     <description>Recent content on kxops</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 25 Apr 2026 22:52:15 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://kxops.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Helloworld</title>
-      <link>http://localhost:1313/posts/helloworld/</link>
+      <link>https://kxops.com/posts/helloworld/</link>
       <pubDate>Sat, 25 Apr 2026 22:52:15 +0800</pubDate>
-      <guid>http://localhost:1313/posts/helloworld/</guid>
+      <guid>https://kxops.com/posts/helloworld/</guid>
       <description>&lt;h3&gt;&lt;/h3&gt;
 &lt;p&gt;你好 世界&amp;hellip;&lt;/p&gt;</description>
     </item>

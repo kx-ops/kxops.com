@@ -6,6 +6,7 @@ theme = 'PaperMod'
 [params]
   mainSections = ["posts"]   
 
+
 [params.assets]
   disableFingerprinting = true
 

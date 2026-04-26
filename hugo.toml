@@ -9,11 +9,6 @@ theme = 'PaperMod'
 [params.assets]
   disableFingerprinting = true
 
-disableKinds = ["taxonomy", "taxonomyTerm", "term", "RSS"]
-
-[taxonomies]
-  category = ""
-  tag = ""
 [[menu.main]]        
   name = "首页"
   weight = 10

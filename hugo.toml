@@ -30,3 +30,5 @@ disableKinds = ["taxonomy", "taxonomyTerm", "term", "RSS"]
   weight = 40
   identifier = "about"
   url = "/about/"  
+
+  

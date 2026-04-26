@@ -3,17 +3,19 @@
 &lt;p&gt;curl -sfL &lt;a href="https://rancher-mirror.rancher.cn/k3s/k3s-install.sh"&gt;https://rancher-mirror.rancher.cn/k3s/k3s-install.sh&lt;/a&gt; |INSTALL_K3S_EXEC=&amp;rsquo;&amp;ndash;flannel-backend=none &amp;ndash;disable-network-policy&amp;rsquo; INSTALL_K3S_MIRROR=cn sh -&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;普通用户使用kubectl&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;mkdir -p ~/.kube &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;sudo chown $(id -u):$(id -g) ~/.kube/config &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;echo &amp;#39;export KUBECONFIG=~/.kube/config&amp;#39; &amp;gt;&amp;gt; ~/.bashrc &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;source ~/.bashrc &amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查看k3s运行状态&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;mkdir -p ~/.kube&lt;br&gt;
-sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config&lt;br&gt;
-sudo chown $(id -u):$(id -g) &lt;del&gt;/.kube/config&lt;br&gt;
-echo &amp;rsquo;export KUBECONFIG=&lt;/del&gt;/.kube/config&amp;rsquo; &amp;raquo; ~/.bashrc&lt;br&gt;
-source ~/.bashrc &amp;quot;&lt;/p&gt;
+&lt;p&gt;systemctl status k3s&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;查看k3s运行状态&lt;br&gt;
-systemctl status k3s&lt;br&gt;
-查看日志&lt;br&gt;
-journalctl -u k3s -f&lt;/p&gt;
+&lt;p&gt;查看日志&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;journalctl -u k3s -f&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;解决国内无法拉到镜相的问题 将 /etc/rancher/k3s/registries.yaml 中的 endpoint 替换为以下仍在维护的源：&lt;br&gt;
 Docker / Kubernetes 国内镜像加速源配置&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;mirrors&lt;/span&gt;:

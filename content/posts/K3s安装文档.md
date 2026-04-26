@@ -8,16 +8,19 @@ title = 'K3s安装文档'
 > curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh |INSTALL_K3S_EXEC='--flannel-backend=none --disable-network-policy'   INSTALL_K3S_MIRROR=cn sh -
 
 普通用户使用kubectl  
-> mkdir -p ~/.kube  
+```yaml
+mkdir -p ~/.kube  
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config  
 sudo chown $(id -u):$(id -g) ~/.kube/config  
 echo 'export KUBECONFIG=~/.kube/config' >> ~/.bashrc  
 source ~/.bashrc "
+```
 
 查看k3s运行状态  
- systemctl status k3s  
+> systemctl status k3s  
+
 查看日志   
-journalctl -u k3s -f
+> journalctl -u k3s -f
 
 解决国内无法拉到镜相的问题 将 /etc/rancher/k3s/registries.yaml 中的 endpoint 替换为以下仍在维护的源：  
 Docker / Kubernetes 国内镜像加速源配置
@@ -45,3 +48,4 @@ mirrors:
   quay.io:
     endpoint:
       - "https://quay.nju.edu.cn"
+```

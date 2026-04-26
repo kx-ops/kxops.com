@@ -5,10 +5,10 @@ title = 'K3s安装文档'
 +++
 
 国内用户，可以使用以下方法加速安装:  
-curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh |INSTALL_K3S_EXEC='--flannel-backend=none --disable-network-policy'   INSTALL_K3S_MIRROR=cn sh -
+> curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh |INSTALL_K3S_EXEC='--flannel-backend=none --disable-network-policy'   INSTALL_K3S_MIRROR=cn sh -
 
 普通用户使用kubectl  
-mkdir -p ~/.kube  
+> mkdir -p ~/.kube  
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config  
 sudo chown $(id -u):$(id -g) ~/.kube/config  
 echo 'export KUBECONFIG=~/.kube/config' >> ~/.bashrc  

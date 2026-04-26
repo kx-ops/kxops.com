@@ -3,9 +3,6 @@ locale = 'en-us'
 title = 'kxops'
 theme = 'PaperMod'
 
-[markup.goldmark.renderer]
-  unsafe = true
-
 [params.assets]
   disableFingerprinting = true
 

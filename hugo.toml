@@ -1,4 +1,4 @@
-baseURL = 'https://www.kxops.com'
+baseURL = 'https://kxops.com'
 locale = 'en-us'
 title = 'kxops'
 theme = 'PaperMod'

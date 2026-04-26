@@ -6,6 +6,9 @@ theme = 'PaperMod'
 [markup.goldmark.renderer]
   unsafe = true
 
+[params.assets]
+  disableFingerprinting = true
+
 [[menu.main]]        
   name = "首页"
   weight = 10

@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>kxops</title><link>https://www.kxops.com/</link><description>Recent content on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 26 Apr 2026 13:27:47 +0800</lastBuildDate><atom:link href="https://www.kxops.com/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://www.kxops.com/about/</link><pubDate>Sun, 26 Apr 2026 13:27:47 +0800</pubDate><guid>https://www.kxops.com/about/</guid><description>&lt;h4&gt;&lt;/h4&gt;
-&lt;p&gt;专注于运维自动化 K8s CI CD GitOPS 相关技术&lt;/p&gt;</description></item><item><title>Hello World</title><link>https://www.kxops.com/posts/hello-world/</link><pubDate>Sun, 26 Apr 2026 13:25:22 +0800</pubDate><guid>https://www.kxops.com/posts/hello-world/</guid><description>&lt;h5&gt;&lt;/h5&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>kxops</title><link>https://kxops.com/</link><description>Recent content on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 26 Apr 2026 13:27:47 +0800</lastBuildDate><atom:link href="https://kxops.com/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://kxops.com/about/</link><pubDate>Sun, 26 Apr 2026 13:27:47 +0800</pubDate><guid>https://kxops.com/about/</guid><description>&lt;h2 id="专注于运维自动化"&gt;专注于运维自动化&lt;/h2&gt;
+&lt;h2 id="k8s-ci-cd-gitops--相关技术"&gt;K8s CI CD GitOPS 相关技术&lt;/h2&gt;
+&lt;p&gt;您好来客,我是Leif&lt;/p&gt;
+&lt;p&gt;超20年 Linux 系统运维工程师
+服务过一线大厂 也服务过初创公司&lt;/p&gt;
+&lt;h1&gt;&lt;/h1&gt;</description></item><item><title>Hello World</title><link>https://kxops.com/posts/hello-world/</link><pubDate>Sun, 26 Apr 2026 13:25:22 +0800</pubDate><guid>https://kxops.com/posts/hello-world/</guid><description>&lt;h5&gt;&lt;/h5&gt;
 &lt;p&gt;Hello World &amp;hellip;
 你好 世界 ！！！！！&lt;/p&gt;</description></item></channel></rss>

@@ -3,8 +3,17 @@ locale = 'en-us'
 title = 'kxops'
 theme = 'PaperMod'
 
+[params]
+  mainSections = ["posts"]   
+
 [params.assets]
   disableFingerprinting = true
+
+disableKinds = ["taxonomy", "taxonomyTerm", "term", "RSS"]
+
+[taxonomies]
+  category = ""
+  tag = ""
 
 [[menu.main]]        
   name = "首页"
@@ -12,23 +21,12 @@ theme = 'PaperMod'
   identifier = "home"
   url = "/"
 [[menu.main]]
-  name = "全部文章"
+  name = "归档"
   weight = 20
   identifier = "archives"
-  url = "/post/"
-[[menu.main]]
-  name = "标签"
-  weight = 30
-  identifier = "tags"
-  url = "/tags/"
-[[menu.main]]
-  name = "分类"
-  weight = 40
-  identifier = "categories"
-  url = "/categories/"
+  url = "/archives/" 
 [[menu.main]]
   name = "关于"
   weight = 40
   identifier = "about"
   url = "/about/"  
-  

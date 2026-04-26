@@ -5,4 +5,4 @@ title = 'About'
 +++
 
 ####
-专注于运维自动化  K8s CI CD github ..........
+专注于运维自动化  K8s CI CD GitOPS  相关技术

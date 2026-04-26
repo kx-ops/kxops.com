@@ -15,7 +15,6 @@ disableKinds = ["taxonomy", "taxonomyTerm", "term", "RSS"]
   category = ""
   tag = ""
 
-
 [[menu.main]]        
   name = "首页"
   weight = 10

@@ -1,0 +1,93 @@
+<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>K3s安装文档 | kxops</title><meta name=keywords content><meta name=description content='国内用户，可以使用以下方法加速安装:
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh |INSTALL_K3S_EXEC=&rsquo;&ndash;flannel-backend=none &ndash;disable-network-policy&rsquo;   INSTALL_K3S_MIRROR=cn sh -
+普通用户使用kubectl
+mkdir -p ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown $(id -u):$(id -g) /.kube/config
+echo &rsquo;export KUBECONFIG=/.kube/config&rsquo; &#187; ~/.bashrc
+source ~/.bashrc "
+查看k3s运行状态
+systemctl status k3s
+查看日志
+journalctl -u k3s -f
+解决国内无法拉到镜相的问题 将 /etc/rancher/k3s/registries.yaml 中的 endpoint 替换为以下仍在维护的源：
+Docker / Kubernetes 国内镜像加速源配置
+mirrors:
+  docker.io:
+    endpoint:
+      - "https://docker.1panel.live"
+      - "https://docker.m.daocloud.io"
+      - "https://hub.rat.dev"
+      - "https://docker.nju.edu.cn"
+  registry.k8s.io:
+    endpoint:
+      - "https://registry.lank8s.cn"
+  gcr.io:
+    endpoint:
+      - "https://gcr.lank8s.cn"
+  k8s.gcr.io:
+    endpoint:
+      - "https://gcr.nju.edu.cn"
+  ghcr.io:
+    endpoint:
+      - "https://ghcr.nju.edu.cn"
+  quay.io:
+    endpoint:
+      - "https://quay.nju.edu.cn"
+'><meta name=author content><link rel=canonical href=https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/><link crossorigin=anonymous href=/assets/css/stylesheet.css rel="preload stylesheet" as=style><link rel=icon href=https://kxops.com/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://kxops.com/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://kxops.com/favicon-32x32.png><link rel=apple-touch-icon href=https://kxops.com/apple-touch-icon.png><link rel=mask-icon href=https://kxops.com/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/"><meta property="og:site_name" content="kxops"><meta property="og:title" content="K3s安装文档"><meta property="og:description" content='国内用户，可以使用以下方法加速安装:
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh |INSTALL_K3S_EXEC=’–flannel-backend=none –disable-network-policy’ INSTALL_K3S_MIRROR=cn sh -
+普通用户使用kubectl
+mkdir -p ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown $(id -u):$(id -g) /.kube/config
+echo ’export KUBECONFIG=/.kube/config’ » ~/.bashrc
+source ~/.bashrc "
+查看k3s运行状态
+systemctl status k3s
+查看日志
+journalctl -u k3s -f
+解决国内无法拉到镜相的问题 将 /etc/rancher/k3s/registries.yaml 中的 endpoint 替换为以下仍在维护的源：
+Docker / Kubernetes 国内镜像加速源配置
+mirrors: docker.io: endpoint: - "https://docker.1panel.live" - "https://docker.m.daocloud.io" - "https://hub.rat.dev" - "https://docker.nju.edu.cn" registry.k8s.io: endpoint: - "https://registry.lank8s.cn" gcr.io: endpoint: - "https://gcr.lank8s.cn" k8s.gcr.io: endpoint: - "https://gcr.nju.edu.cn" ghcr.io: endpoint: - "https://ghcr.nju.edu.cn" quay.io: endpoint: - "https://quay.nju.edu.cn"'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-04-26T22:39:53+08:00"><meta property="article:modified_time" content="2026-04-26T22:39:53+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="K3s安装文档"><meta name=twitter:description content='国内用户，可以使用以下方法加速安装:
+curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh |INSTALL_K3S_EXEC=’–flannel-backend=none –disable-network-policy’ INSTALL_K3S_MIRROR=cn sh -
+普通用户使用kubectl
+mkdir -p ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown $(id -u):$(id -g) /.kube/config
+echo ’export KUBECONFIG=/.kube/config’ » ~/.bashrc
+source ~/.bashrc "
+查看k3s运行状态
+systemctl status k3s
+查看日志
+journalctl -u k3s -f
+解决国内无法拉到镜相的问题 将 /etc/rancher/k3s/registries.yaml 中的 endpoint 替换为以下仍在维护的源：
+Docker / Kubernetes 国内镜像加速源配置
+mirrors: docker.io: endpoint: - "https://docker.1panel.live" - "https://docker.m.daocloud.io" - "https://hub.rat.dev" - "https://docker.nju.edu.cn" registry.k8s.io: endpoint: - "https://registry.lank8s.cn" gcr.io: endpoint: - "https://gcr.lank8s.cn" k8s.gcr.io: endpoint: - "https://gcr.nju.edu.cn" ghcr.io: endpoint: - "https://ghcr.nju.edu.cn" quay.io: endpoint: - "https://quay.nju.edu.cn"'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://kxops.com/posts/"},{"@type":"ListItem","position":2,"name":"K3s安装文档","item":"https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"K3s安装文档","name":"K3s安装文档","description":"国内用户，可以使用以下方法加速安装:\ncurl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh |INSTALL_K3S_EXEC=\u0026rsquo;\u0026ndash;flannel-backend=none \u0026ndash;disable-network-policy\u0026rsquo; INSTALL_K3S_MIRROR=cn sh -\n普通用户使用kubectl\nmkdir -p ~/.kube\nsudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config\nsudo chown $(id -u):$(id -g) /.kube/config\necho \u0026rsquo;export KUBECONFIG=/.kube/config\u0026rsquo; \u0026raquo; ~/.bashrc\nsource ~/.bashrc \u0026quot;\n查看k3s运行状态\nsystemctl status k3s\n查看日志\njournalctl -u k3s -f\n解决国内无法拉到镜相的问题 将 /etc/rancher/k3s/registries.yaml 中的 endpoint 替换为以下仍在维护的源：\nDocker / Kubernetes 国内镜像加速源配置\nmirrors: docker.io: endpoint: - \u0026#34;https://docker.1panel.live\u0026#34; - \u0026#34;https://docker.m.daocloud.io\u0026#34; - \u0026#34;https://hub.rat.dev\u0026#34; - \u0026#34;https://docker.nju.edu.cn\u0026#34; registry.k8s.io: endpoint: - \u0026#34;https://registry.lank8s.cn\u0026#34; gcr.io: endpoint: - \u0026#34;https://gcr.lank8s.cn\u0026#34; k8s.gcr.io: endpoint: - \u0026#34;https://gcr.nju.edu.cn\u0026#34; ghcr.io: endpoint: - \u0026#34;https://ghcr.nju.edu.cn\u0026#34; quay.io: endpoint: - \u0026#34;https://quay.nju.edu.cn\u0026#34; ","keywords":[],"articleBody":"国内用户，可以使用以下方法加速安装:\ncurl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh |INSTALL_K3S_EXEC=’–flannel-backend=none –disable-network-policy’ INSTALL_K3S_MIRROR=cn sh -\n普通用户使用kubectl\nmkdir -p ~/.kube\nsudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config\nsudo chown $(id -u):$(id -g) /.kube/config\necho ’export KUBECONFIG=/.kube/config’ » ~/.bashrc\nsource ~/.bashrc \"\n查看k3s运行状态\nsystemctl status k3s\n查看日志\njournalctl -u k3s -f\n解决国内无法拉到镜相的问题 将 /etc/rancher/k3s/registries.yaml 中的 endpoint 替换为以下仍在维护的源：\nDocker / Kubernetes 国内镜像加速源配置\nmirrors: docker.io: endpoint: - \"https://docker.1panel.live\" - \"https://docker.m.daocloud.io\" - \"https://hub.rat.dev\" - \"https://docker.nju.edu.cn\" registry.k8s.io: endpoint: - \"https://registry.lank8s.cn\" gcr.io: endpoint: - \"https://gcr.lank8s.cn\" k8s.gcr.io: endpoint: - \"https://gcr.nju.edu.cn\" ghcr.io: endpoint: - \"https://ghcr.nju.edu.cn\" quay.io: endpoint: - \"https://quay.nju.edu.cn\" ","wordCount":"81","inLanguage":"en","datePublished":"2026-04-26T22:39:53+08:00","dateModified":"2026-04-26T22:39:53+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/"},"publisher":{"@type":"Organization","name":"kxops","logo":{"@type":"ImageObject","url":"https://kxops.com/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://kxops.com/ accesskey=h title="kxops (Alt + H)">kxops</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://kxops.com/ title=首页><span>首页</span></a></li><li><a href=https://kxops.com/archives/ title=归档><span>归档</span></a></li><li><a href=https://kxops.com/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><h1 class="post-title entry-hint-parent">K3s安装文档</h1><div class=post-meta><span title='2026-04-26 22:39:53 +0800 CST'>April 26, 2026</span></div></header><div class="post-content md-content"><p>国内用户，可以使用以下方法加速安装:<br>curl -sfL <a href=https://rancher-mirror.rancher.cn/k3s/k3s-install.sh>https://rancher-mirror.rancher.cn/k3s/k3s-install.sh</a> |INSTALL_K3S_EXEC=&rsquo;&ndash;flannel-backend=none &ndash;disable-network-policy&rsquo; INSTALL_K3S_MIRROR=cn sh -</p><p>普通用户使用kubectl<br>mkdir -p ~/.kube<br>sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config<br>sudo chown $(id -u):$(id -g) <del>/.kube/config<br>echo &rsquo;export KUBECONFIG=</del>/.kube/config&rsquo; &#187; ~/.bashrc<br>source ~/.bashrc "</p><p>查看k3s运行状态<br>systemctl status k3s<br>查看日志<br>journalctl -u k3s -f</p><p>解决国内无法拉到镜相的问题 将 /etc/rancher/k3s/registries.yaml 中的 endpoint 替换为以下仍在维护的源：<br>Docker / Kubernetes 国内镜像加速源配置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>mirrors</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>docker.io</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>endpoint</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#34;https://docker.1panel.live&#34;</span>
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#34;https://docker.m.daocloud.io&#34;</span>
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#34;https://hub.rat.dev&#34;</span>
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#34;https://docker.nju.edu.cn&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>registry.k8s.io</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>endpoint</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#34;https://registry.lank8s.cn&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>gcr.io</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>endpoint</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#34;https://gcr.lank8s.cn&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>k8s.gcr.io</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>endpoint</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#34;https://gcr.nju.edu.cn&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>ghcr.io</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>endpoint</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#34;https://ghcr.nju.edu.cn&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>quay.io</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>endpoint</span>:
+</span></span><span style=display:flex><span>      - <span style=color:#e6db74>&#34;https://quay.nju.edu.cn&#34;</span>
+</span></span></code></pre></div></div><footer class=post-footer><ul class=post-tags></ul></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://kxops.com/>kxops</a></span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>

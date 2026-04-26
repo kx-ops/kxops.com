@@ -1,4 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>kxops</title><link>https://kxops.com/</link><description>Recent content on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 26 Apr 2026 13:27:47 +0800</lastBuildDate><atom:link href="https://kxops.com/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://kxops.com/about/</link><pubDate>Sun, 26 Apr 2026 13:27:47 +0800</pubDate><guid>https://kxops.com/about/</guid><description>&lt;h2 id="专注于运维自动化"&gt;专注于运维自动化&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>kxops</title><link>https://kxops.com/</link><description>Recent content on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 26 Apr 2026 22:39:53 +0800</lastBuildDate><atom:link href="https://kxops.com/index.xml" rel="self" type="application/rss+xml"/><item><title>K3s安装文档</title><link>https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</link><pubDate>Sun, 26 Apr 2026 22:39:53 +0800</pubDate><guid>https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</guid><description>&lt;p&gt;国内用户，可以使用以下方法加速安装:&lt;br&gt;
+curl -sfL &lt;a href="https://rancher-mirror.rancher.cn/k3s/k3s-install.sh"&gt;https://rancher-mirror.rancher.cn/k3s/k3s-install.sh&lt;/a&gt; |INSTALL_K3S_EXEC=&amp;rsquo;&amp;ndash;flannel-backend=none &amp;ndash;disable-network-policy&amp;rsquo; INSTALL_K3S_MIRROR=cn sh -&lt;/p&gt;
+&lt;p&gt;普通用户使用kubectl&lt;br&gt;
+mkdir -p ~/.kube&lt;br&gt;
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config&lt;br&gt;
+sudo chown $(id -u):$(id -g) &lt;del&gt;/.kube/config&lt;br&gt;
+echo &amp;rsquo;export KUBECONFIG=&lt;/del&gt;/.kube/config&amp;rsquo; &amp;raquo; ~/.bashrc&lt;br&gt;
+source ~/.bashrc &amp;quot;&lt;/p&gt;
+&lt;p&gt;查看k3s运行状态&lt;br&gt;
+systemctl status k3s&lt;br&gt;
+查看日志&lt;br&gt;
+journalctl -u k3s -f&lt;/p&gt;
+&lt;p&gt;解决国内无法拉到镜相的问题 将 /etc/rancher/k3s/registries.yaml 中的 endpoint 替换为以下仍在维护的源：&lt;br&gt;
+Docker / Kubernetes 国内镜像加速源配置&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;mirrors&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;docker.io&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;endpoint&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e6db74"&gt;&amp;#34;https://docker.1panel.live&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e6db74"&gt;&amp;#34;https://docker.m.daocloud.io&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e6db74"&gt;&amp;#34;https://hub.rat.dev&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e6db74"&gt;&amp;#34;https://docker.nju.edu.cn&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;registry.k8s.io&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;endpoint&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e6db74"&gt;&amp;#34;https://registry.lank8s.cn&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;gcr.io&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;endpoint&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e6db74"&gt;&amp;#34;https://gcr.lank8s.cn&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;k8s.gcr.io&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;endpoint&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e6db74"&gt;&amp;#34;https://gcr.nju.edu.cn&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;ghcr.io&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;endpoint&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e6db74"&gt;&amp;#34;https://ghcr.nju.edu.cn&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;quay.io&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;endpoint&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#e6db74"&gt;&amp;#34;https://quay.nju.edu.cn&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>About</title><link>https://kxops.com/about/</link><pubDate>Sun, 26 Apr 2026 13:27:47 +0800</pubDate><guid>https://kxops.com/about/</guid><description>&lt;h2 id="专注于运维自动化"&gt;专注于运维自动化&lt;/h2&gt;
 &lt;h3 id="k8s-ci-cd-gitops--相关技术"&gt;K8s CI CD GitOPS 相关技术&lt;/h3&gt;
 &lt;h1&gt;&lt;/h1&gt;
 &lt;p&gt;我是 Leif &amp;hellip;. 大龄运维工程师&lt;/p&gt;</description></item><item><title>Hello World</title><link>https://kxops.com/posts/hello-world/</link><pubDate>Sun, 26 Apr 2026 13:25:22 +0800</pubDate><guid>https://kxops.com/posts/hello-world/</guid><description>&lt;h5&gt;&lt;/h5&gt;

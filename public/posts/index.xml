@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on kxops</title><link>https://kxops.com/posts/</link><description>Recent content in Posts on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 26 Apr 2026 22:39:53 +0800</lastBuildDate><atom:link href="https://kxops.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>K3s安装文档</title><link>https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</link><pubDate>Sun, 26 Apr 2026 22:39:53 +0800</pubDate><guid>https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</guid><description>&lt;p&gt;国内用户，可以使用以下方法加速安装:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on kxops</title><link>https://kxops.com/posts/</link><description>Recent content in Posts on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 27 Apr 2026 22:44:35 +0800</lastBuildDate><atom:link href="https://kxops.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Github ArgoCD K8s Gitops搭建流水线</title><link>https://kxops.com/posts/github-argocd-k8s-gitops%E6%90%AD%E5%BB%BA%E6%B5%81%E6%B0%B4%E7%BA%BF/</link><pubDate>Mon, 27 Apr 2026 22:44:35 +0800</pubDate><guid>https://kxops.com/posts/github-argocd-k8s-gitops%E6%90%AD%E5%BB%BA%E6%B5%81%E6%B0%B4%E7%BA%BF/</guid><description>&lt;h3 id="全部示范代码在"&gt;全部示范代码在 &lt;a href="https://github.com/kx-ops/thinkphp"&gt;https://github.com/kx-ops/thinkphp&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;这是份部署 thinkphp 用的版本 镜相大小为 250M
+可以使用 docker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed 拉取&lt;br&gt;
+打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)&lt;/p&gt;
+&lt;h3 id="流程"&gt;流程&lt;/h3&gt;
+&lt;p&gt;1 . 代码提交 &amp;mdash;&amp;ndash; Github&lt;br&gt;
+2 . 打包镜相CI &amp;mdash;&amp;ndash; 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID&lt;br&gt;
+3 . 持续部署CD &amp;mdash;&amp;ndash; ArgoCD 监听 Github 仓库中的 k8s/deploy.yaml 变化 部署到K8s集群&lt;/p&gt;
+&lt;p&gt;前提条件：
+设置 GitHub 仓库 GitHub Personal Access Token（PAT）具有 write:packages 权限&lt;br&gt;
+生成一个SSH KEY 用于argo CD 连github 并注入到github 用户 SSH中&lt;/p&gt;
+&lt;h4 id="代码结构"&gt;代码结构&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;thinkphp/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;├── Docker&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;│ └──Dockerfile &lt;/span&gt; &lt;span style="color:#75715e"&gt;# Dockerfile文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;├── public/ &lt;/span&gt; &lt;span style="color:#75715e"&gt;# 应用代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;├── .github/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;│ └── workflows/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;│ └── main.yml &lt;/span&gt; &lt;span style="color:#75715e"&gt;# GitHub Actions 工作流&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;├── k8s/ &lt;/span&gt; &lt;span style="color:#75715e"&gt;# Kubernetes manifests（供 Argo CD 使用）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;│ └── deploy.yaml &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;└── .dockerignore &lt;/span&gt; &lt;span style="color:#75715e"&gt;#需要忽略打包的文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;│ &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;└── .gitignore &lt;/span&gt; &lt;span style="color:#75715e"&gt;#需要gitignore &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;略去K8s 安装&lt;br&gt;
+记录 ArgoCD 安装过程&lt;/p&gt;</description></item><item><title>K3s安装文档</title><link>https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</link><pubDate>Sun, 26 Apr 2026 22:39:53 +0800</pubDate><guid>https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</guid><description>&lt;p&gt;国内用户，可以使用以下方法加速安装:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;curl -sfL &lt;a href="https://rancher-mirror.rancher.cn/k3s/k3s-install.sh"&gt;https://rancher-mirror.rancher.cn/k3s/k3s-install.sh&lt;/a&gt; |INSTALL_K3S_EXEC=&amp;rsquo;&amp;ndash;flannel-backend=none &amp;ndash;disable-network-policy&amp;rsquo; INSTALL_K3S_MIRROR=cn sh -&lt;/p&gt;
 &lt;/blockquote&gt;

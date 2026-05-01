@@ -8,7 +8,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果没有报错，稍等片刻查看 cert-manager 运行正常，就可以继续下一步了：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; kubectl get pods --namespace cert-manager
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;NAME READY STATUS RESTARTS AGE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;NAME READY STATUS RESTARTS AGE
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cert-manager-6575b47cb5-fcbt5 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 32s
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cert-manager-cainjector-b6555495-wrvlx 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 32s
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cert-manager-webhook-787d9fc46-v248j 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 32s

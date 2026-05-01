@@ -6,8 +6,6 @@ title = 'k8s使用 Letsencrypt 和 Traefik 实现 https 自动部署'
 
 
 k3s 使用 Letsencrypt 和 Traefik 完成 https 入口部署
-
-
 ### 内容提要
 本文介绍 cert-manager 插件的安装，之后以一个简单的 web 服务部署为例，演示 https 服务的部署过程。
 
@@ -22,7 +20,6 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 
 ```bash
  kubectl get pods --namespace cert-manager
-NAME                                     READY   STATUS    RESTARTS   AGE
 NAME                                     READY   STATUS    RESTARTS   AGE
 cert-manager-6575b47cb5-fcbt5            1/1     Running   0          32s
 cert-manager-cainjector-b6555495-wrvlx   1/1     Running   0          32s

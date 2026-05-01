@@ -200,6 +200,7 @@ NAME                        CLASS     HOSTS             ADDRESS   PORTS     AGE
 nginx-ingress               traefik   nginx.kxops.com             80, 443   4m17s
 ```
 
+
 由于使用了 cert-manager 证书资源，该插件会自动完成证书的认证、部署和续签，看一下证书状态：
 ```bash
 kubectl -n nginx describe certificate

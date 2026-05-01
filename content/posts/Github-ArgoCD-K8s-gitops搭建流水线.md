@@ -14,7 +14,31 @@ docker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed
 打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)
 
 流程
-![GitOps 流程图](/img/flow.png)
+~~~ mermaid 
+graph LR
+    %% 节点定义
+    Developer[代码提交]
+    Github[Github Repository]
+    GHA[Github Actions CI]
+    GHCR[(Github Packages)]
+    Manifest[k8s/deploy.yaml 更新]
+    ArgoCD[ArgoCD]
+    K8s[K8s 集群]
+
+    %% 流程连接
+    Developer -->|git push| Github
+    Github -->|触发 Workflow| GHA
+    GHA -->|构建镜相| GHCR
+    GHA -->|更新镜相| Manifest
+    Manifest -->|监听变化| ArgoCD
+    ArgoCD -->|拉取/应用| K8s
+
+    %% 样式美化
+    style Github fill:#f9f,stroke:#333
+    style GHCR fill:#bbf,stroke:#333
+    style ArgoCD fill:#f96,stroke:#333
+    style K8s fill:#7cf,stroke:#333
+~~~
 
 1 . 代码提交        ----- Github  
 2 . 打包镜相CI      ----- 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID  

@@ -106,7 +106,7 @@ cat deployment.yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx-web
   namespace: nginx 
   labels:
     app: nginx

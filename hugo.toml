@@ -5,7 +5,7 @@ theme = 'PaperMod'
 
 [params]
   mainSections = ["posts"]   
-
+  mermaid = true
 
 [params.assets]
   disableFingerprinting = true
@@ -25,5 +25,3 @@ theme = 'PaperMod'
   weight = 40
   identifier = "about"
   url = "/about/" 
-
-  

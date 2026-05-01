@@ -5,12 +5,40 @@ title = 'Github ArgoCD K8s Gitops搭建流水线'
 +++
 
 
-### 全部示范代码在 https://github.com/kx-ops/thinkphp   
+全部示范代码在 https://github.com/kx-ops/thinkphp   
 这是份部署 thinkphp 用的版本 镜相大小为 250M 
-可以使用 docker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed 拉取  
+可以使用下面指令拉取
+```bash
+docker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed 
+```
 打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)
 
-### 流程
+流程
+~~~ mermaid 
+graph LR
+    %% 节点定义
+    Developer[代码提交]
+    Github[Github Repository]
+    GHA[Github Actions CI]
+    GHCR[(Github Packages)]
+    Manifest[k8s/deploy.yaml 更新]
+    ArgoCD[ArgoCD]
+    K8s[K8s 集群]
+
+    %% 流程连接
+    Developer -->|git push| Github
+    Github -->|触发 Workflow| GHA
+    GHA -->|构建镜相| GHCR
+    GHA -->|更新镜相| Manifest
+    Manifest -->|监听变化| ArgoCD
+    ArgoCD -->|拉取/应用| K8s
+
+    %% 样式美化
+    style Github fill:#f9f,stroke:#333
+    style GHCR fill:#bbf,stroke:#333
+    style ArgoCD fill:#f96,stroke:#333
+    style K8s fill:#7cf,stroke:#333
+~~~
 
 1 . 代码提交        ----- Github  
 2 . 打包镜相CI      ----- 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID  
@@ -20,21 +48,21 @@ title = 'Github ArgoCD K8s Gitops搭建流水线'
 设置 GitHub 仓库  GitHub Personal Access Token（PAT）具有 write:packages 权限  
 生成一个SSH KEY 用于argo CD 连github 并注入到github 用户 SSH中
 
-#### 代码结构
-~~~~yaml
-thinkphp/
-├── Docker
-│  └──Dockerfile        # Dockerfile文件
-├── public/             # 应用代码
-├── .github/
-│   └── workflows/
-│       └── main.yml    # GitHub Actions 工作流
-├── k8s/                # Kubernetes manifests（供 Argo CD 使用）
-│   └── deploy.yaml  
-└── .dockerignore       #需要忽略打包的文件
-│ 
-└── .gitignore          #需要gitignore  
-~~~~
+代码结构
+~~~ mermaid 
+treeView-beta
+"thinkphp"
+        ".dockerignore"
+        ".gitignore"
+        ".github"
+            "workflows"
+                "main.yaml"
+        "public"
+        "k8s"
+            "deploy.yaml"
+        "Docker"
+            "Dockerfile"
+~~~ 
 
 略去K8s 安装  
 记录 ArgoCD 安装过程  
@@ -73,4 +101,3 @@ Namespace: default
 点击 CREATE，然后 SYNC。
 
 这样就即大功告成
-

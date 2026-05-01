@@ -8,38 +8,7 @@ kubectl create namespace cert-manager kubectl apply -f https://github.com/cert-m
 kubectl get pods --namespace cert-manager NAME READY STATUS RESTARTS AGE cert-manager-6575b47cb5-fcbt5 1/1 Running 0 32s cert-manager-cainjector-b6555495-wrvlx 1/1 Running 0 32s cert-manager-webhook-787d9fc46-v248j 1/1 Running 0 32s 部署 Issuing Certificates#
 下面给出一个示例的 letsencrypt.yml 配置，替换其中的邮箱 即可快速查看配置。
 apiVersion: cert-manager.io/v1 kind: ClusterIssuer metadata: name: letsencrypt-prod spec: acme: email: git@kxops.com privateKeySecretRef: name: prod-issuer-account-key server: https://acme-v02.api.letsencrypt.org/directory solvers: - http01: ingress: class: traefik selector: {} 部署，并查看部署描述：
-...</p></div><footer class=entry-footer><span title='2026-05-01 16:50:13 +0800 CST'>May 1, 2026</span></footer><a class=entry-link aria-label="post link to k8s使用 Letsencrypt 和 Traefik 实现 https 自动部署" href=https://kxops.com/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Github ArgoCD K8s Gitops搭建流水线</h2></header><div class=entry-content><p>全部示范代码在 https://github.com/kx-ops/thinkphp
-这是份部署 thinkphp 用的版本 镜相大小为 250M 可以使用下面指令拉取
-docker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed 打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)
-流程 1 . 代码提交 —– Github
-2 . 打包镜相CI —– 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID
-3 . 持续部署CD —– ArgoCD 监听 Github 仓库中的 k8s/deploy.yaml 变化 部署到K8s集群
-前提条件： 设置 GitHub 仓库 GitHub Personal Access Token（PAT）具有 write:packages 权限
-生成一个SSH KEY 用于argo CD 连github 并注入到github 用户 SSH中
-代码结构
-treeView-beta
-"thinkphp"
-".dockerignore"
-".gitignore"
-".github"
-"workflows"
-"main.yaml"
-"public"
-"k8s"
-"deploy.yaml"
-"Docker"
-"Dockerfile" 略去K8s 安装
-记录 ArgoCD 安装过程
-...</p></div><footer class=entry-footer><span title='2026-04-27 22:44:35 +0800 CST'>April 27, 2026</span></footer><a class=entry-link aria-label="post link to Github ArgoCD K8s Gitops搭建流水线" href=https://kxops.com/posts/github-argocd-k8s-gitops%E6%90%AD%E5%BB%BA%E6%B5%81%E6%B0%B4%E7%BA%BF/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>K3s安装文档</h2></header><div class=entry-content><p>国内用户，可以使用以下方法加速安装:
-curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh |INSTALL_K3S_EXEC=’–flannel-backend=none –disable-network-policy’ INSTALL_K3S_MIRROR=cn sh -
-普通用户使用kubectl
-mkdir -p ~/.kube sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config sudo chown $(id -u):$(id -g) ~/.kube/config echo 'export KUBECONFIG=~/.kube/config' >> ~/.bashrc source ~/.bashrc " 查看k3s运行状态
-systemctl status k3s
-查看日志
-journalctl -u k3s -f
-解决国内无法拉到镜相的问题 将 /etc/rancher/k3s/registries.yaml 中的 endpoint 替换为以下仍在维护的源：
-Docker / Kubernetes 国内镜像加速源配置
-mirrors: docker.io: endpoint: - "https://docker.1panel.live" - "https://docker.m.daocloud.io" - "https://hub.rat.dev" - "https://docker.nju.edu.cn" registry.k8s.io: endpoint: - "https://registry.lank8s.cn" gcr.io: endpoint: - "https://gcr.lank8s.cn" k8s.gcr.io: endpoint: - "https://gcr.nju.edu.cn" ghcr.io: endpoint: - "https://ghcr.nju.edu.cn" quay.io: endpoint: - "https://quay.nju.edu.cn"</p></div><footer class=entry-footer><span title='2026-04-26 22:39:53 +0800 CST'>April 26, 2026</span></footer><a class=entry-link aria-label="post link to K3s安装文档" href=https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Hello World</h2></header><div class=entry-content><p>Hello World … 你好 世界 ！！！！！</p></div><footer class=entry-footer><span title='2026-04-26 13:25:22 +0800 CST'>April 26, 2026</span></footer><a class=entry-link aria-label="post link to Hello World" href=https://kxops.com/posts/hello-world/></a></article></main><footer class=footer><span>&copy; 2026 <a href=https://kxops.com/>kxops</a></span> ·
+...</p></div><footer class=entry-footer><span title='2026-05-01 16:50:13 +0800 CST'>May 1, 2026</span></footer><a class=entry-link aria-label="post link to k8s使用 Letsencrypt 和 Traefik 实现 https 自动部署" href=https://kxops.com/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Hello World</h2></header><div class=entry-content><p>Hello World … 你好 世界 ！！！！！</p></div><footer class=entry-footer><span title='2026-04-26 13:25:22 +0800 CST'>April 26, 2026</span></footer><a class=entry-link aria-label="post link to Hello World" href=https://kxops.com/posts/hello-world/></a></article></main><footer class=footer><span>&copy; 2026 <a href=https://kxops.com/>kxops</a></span> ·
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
 <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>

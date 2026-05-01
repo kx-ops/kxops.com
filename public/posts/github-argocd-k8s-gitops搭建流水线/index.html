@@ -1,76 +1,0 @@
-<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Github ArgoCD K8s Gitops搭建流水线 | kxops</title><meta name=keywords content><meta name=description content='全部示范代码在 https://github.com/kx-ops/thinkphp
-这是份部署 thinkphp 用的版本 镜相大小为 250M
-可以使用下面指令拉取
-docker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed 
-打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)
-流程
-
-1 . 代码提交        &mdash;&ndash; Github
-2 . 打包镜相CI      &mdash;&ndash; 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID
-3 . 持续部署CD      &mdash;&ndash; ArgoCD 监听 Github 仓库中的 k8s/deploy.yaml 变化 部署到K8s集群
-前提条件：
-设置 GitHub 仓库  GitHub Personal Access Token（PAT）具有 write:packages 权限
-生成一个SSH KEY 用于argo CD 连github 并注入到github 用户 SSH中
-代码结构
-treeView-beta
-"thinkphp"
-        ".dockerignore"
-        ".gitignore"
-        ".github"
-            "workflows"
-                "main.yaml"
-        "public"
-        "k8s"
-            "deploy.yaml"
-        "Docker"
-            "Dockerfile"
-略去K8s 安装
-记录 ArgoCD 安装过程'><meta name=author content><link rel=canonical href=https://kxops.com/posts/github-argocd-k8s-gitops%E6%90%AD%E5%BB%BA%E6%B5%81%E6%B0%B4%E7%BA%BF/><link crossorigin=anonymous href=/assets/css/stylesheet.css rel="preload stylesheet" as=style><link rel=icon href=https://kxops.com/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://kxops.com/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://kxops.com/favicon-32x32.png><link rel=apple-touch-icon href=https://kxops.com/apple-touch-icon.png><link rel=mask-icon href=https://kxops.com/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://kxops.com/posts/github-argocd-k8s-gitops%E6%90%AD%E5%BB%BA%E6%B5%81%E6%B0%B4%E7%BA%BF/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://kxops.com/posts/github-argocd-k8s-gitops%E6%90%AD%E5%BB%BA%E6%B5%81%E6%B0%B4%E7%BA%BF/"><meta property="og:site_name" content="kxops"><meta property="og:title" content="Github ArgoCD K8s Gitops搭建流水线"><meta property="og:description" content='全部示范代码在 https://github.com/kx-ops/thinkphp
-这是份部署 thinkphp 用的版本 镜相大小为 250M 可以使用下面指令拉取
-docker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed 打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)
-流程 1 . 代码提交 —– Github
-2 . 打包镜相CI —– 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID
-3 . 持续部署CD —– ArgoCD 监听 Github 仓库中的 k8s/deploy.yaml 变化 部署到K8s集群
-前提条件： 设置 GitHub 仓库 GitHub Personal Access Token（PAT）具有 write:packages 权限
-生成一个SSH KEY 用于argo CD 连github 并注入到github 用户 SSH中
-代码结构
-treeView-beta"thinkphp"".dockerignore"".gitignore"".github""workflows""main.yaml""public""k8s""deploy.yaml""Docker""Dockerfile" 略去K8s 安装
-记录 ArgoCD 安装过程'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-04-27T22:44:35+08:00"><meta property="article:modified_time" content="2026-04-27T22:44:35+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Github ArgoCD K8s Gitops搭建流水线"><meta name=twitter:description content='全部示范代码在 https://github.com/kx-ops/thinkphp
-这是份部署 thinkphp 用的版本 镜相大小为 250M 可以使用下面指令拉取
-docker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed 打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)
-流程 1 . 代码提交 —– Github
-2 . 打包镜相CI —– 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID
-3 . 持续部署CD —– ArgoCD 监听 Github 仓库中的 k8s/deploy.yaml 变化 部署到K8s集群
-前提条件： 设置 GitHub 仓库 GitHub Personal Access Token（PAT）具有 write:packages 权限
-生成一个SSH KEY 用于argo CD 连github 并注入到github 用户 SSH中
-代码结构
-treeView-beta"thinkphp"".dockerignore"".gitignore"".github""workflows""main.yaml""public""k8s""deploy.yaml""Docker""Dockerfile" 略去K8s 安装
-记录 ArgoCD 安装过程'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://kxops.com/posts/"},{"@type":"ListItem","position":2,"name":"Github ArgoCD K8s Gitops搭建流水线","item":"https://kxops.com/posts/github-argocd-k8s-gitops%E6%90%AD%E5%BB%BA%E6%B5%81%E6%B0%B4%E7%BA%BF/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Github ArgoCD K8s Gitops搭建流水线","name":"Github ArgoCD K8s Gitops搭建流水线","description":"全部示范代码在 https://github.com/kx-ops/thinkphp\n这是份部署 thinkphp 用的版本 镜相大小为 250M 可以使用下面指令拉取\ndocker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed 打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)\n流程 1 . 代码提交 \u0026mdash;\u0026ndash; Github\n2 . 打包镜相CI \u0026mdash;\u0026ndash; 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID\n3 . 持续部署CD \u0026mdash;\u0026ndash; ArgoCD 监听 Github 仓库中的 k8s/deploy.yaml 变化 部署到K8s集群\n前提条件： 设置 GitHub 仓库 GitHub Personal Access Token（PAT）具有 write:packages 权限\n生成一个SSH KEY 用于argo CD 连github 并注入到github 用户 SSH中\n代码结构\ntreeView-beta\r\u0026#34;thinkphp\u0026#34;\r\u0026#34;.dockerignore\u0026#34;\r\u0026#34;.gitignore\u0026#34;\r\u0026#34;.github\u0026#34;\r\u0026#34;workflows\u0026#34;\r\u0026#34;main.yaml\u0026#34;\r\u0026#34;public\u0026#34;\r\u0026#34;k8s\u0026#34;\r\u0026#34;deploy.yaml\u0026#34;\r\u0026#34;Docker\u0026#34;\r\u0026#34;Dockerfile\u0026#34; 略去K8s 安装\n记录 ArgoCD 安装过程\n","keywords":[],"articleBody":"全部示范代码在 https://github.com/kx-ops/thinkphp\n这是份部署 thinkphp 用的版本 镜相大小为 250M 可以使用下面指令拉取\ndocker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed 打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)\n流程 1 . 代码提交 —– Github\n2 . 打包镜相CI —– 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID\n3 . 持续部署CD —– ArgoCD 监听 Github 仓库中的 k8s/deploy.yaml 变化 部署到K8s集群\n前提条件： 设置 GitHub 仓库 GitHub Personal Access Token（PAT）具有 write:packages 权限\n生成一个SSH KEY 用于argo CD 连github 并注入到github 用户 SSH中\n代码结构\ntreeView-beta\r\"thinkphp\"\r\".dockerignore\"\r\".gitignore\"\r\".github\"\r\"workflows\"\r\"main.yaml\"\r\"public\"\r\"k8s\"\r\"deploy.yaml\"\r\"Docker\"\r\"Dockerfile\" 略去K8s 安装\n记录 ArgoCD 安装过程\n创建命名空间 kubectl create namespace argocd\n应用官方安装清单（stable 版本） kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml\n暴露 Argo CD 服务 kubectl patch svc argocd-server -n argocd -p ‘{“spec”: {“type”: “NodePort”}}’\n获取初始密码并登录 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=\"{.data.password}\" | base64 -d echo “用户名: admin”\n进入 Argo CD 连接github 仓库 建应用 登入Argo CD Web 界面 左侧菜单 → Settings → Repositories。 点击右上角 + Connect Repo。 选择连接方式：HTTPS：输入仓库 URL、Username、Password（PAT）。 SSH：输入 git@github.com:kx-ops/thinkphp.git，并粘贴私钥内容。 点击 Connect，测试通过后保存。\n建应用 NEW APP\n填写：Application Name: my-app\nProject: default\nSync Policy: Automated（开启自动同步）\nRepository URL: 你的部署 Git 仓库\nPath: k8s（或具体子目录）\nCluster: https://kubernetes.default.svc\nNamespace: default\n点击 CREATE，然后 SYNC。\n这样就即大功告成\n","wordCount":"177","inLanguage":"en","datePublished":"2026-04-27T22:44:35+08:00","dateModified":"2026-04-27T22:44:35+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kxops.com/posts/github-argocd-k8s-gitops%E6%90%AD%E5%BB%BA%E6%B5%81%E6%B0%B4%E7%BA%BF/"},"publisher":{"@type":"Organization","name":"kxops","logo":{"@type":"ImageObject","url":"https://kxops.com/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://kxops.com/ accesskey=h title="kxops (Alt + H)">kxops</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://kxops.com/ title=首页><span>首页</span></a></li><li><a href=https://kxops.com/archives/ title=归档><span>归档</span></a></li><li><a href=https://kxops.com/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><h1 class="post-title entry-hint-parent">Github ArgoCD K8s Gitops搭建流水线</h1><div class=post-meta><span title='2026-04-27 22:44:35 +0800 CST'>April 27, 2026</span></div></header><div class="post-content md-content"><p>全部示范代码在 <a href=https://github.com/kx-ops/thinkphp>https://github.com/kx-ops/thinkphp</a><br>这是份部署 thinkphp 用的版本 镜相大小为 250M
-可以使用下面指令拉取</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>docker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed 
-</span></span></code></pre></div><p>打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)</p><p>流程
-<img alt="GitOps 流程图" loading=lazy src=/img/flow.png></p><p>1 . 代码提交 &mdash;&ndash; Github<br>2 . 打包镜相CI &mdash;&ndash; 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID<br>3 . 持续部署CD &mdash;&ndash; ArgoCD 监听 Github 仓库中的 k8s/deploy.yaml 变化 部署到K8s集群</p><p>前提条件：
-设置 GitHub 仓库 GitHub Personal Access Token（PAT）具有 write:packages 权限<br>生成一个SSH KEY 用于argo CD 连github 并注入到github 用户 SSH中</p><p>代码结构</p><pre tabindex=0><code class=language-mermaid data-lang=mermaid>treeView-beta
-&#34;thinkphp&#34;
-        &#34;.dockerignore&#34;
-        &#34;.gitignore&#34;
-        &#34;.github&#34;
-            &#34;workflows&#34;
-                &#34;main.yaml&#34;
-        &#34;public&#34;
-        &#34;k8s&#34;
-            &#34;deploy.yaml&#34;
-        &#34;Docker&#34;
-            &#34;Dockerfile&#34;
-</code></pre><p>略去K8s 安装<br>记录 ArgoCD 安装过程</p><ol><li>创建命名空间</li></ol><blockquote><p>kubectl create namespace argocd</p></blockquote><ol start=2><li>应用官方安装清单（stable 版本）</li></ol><blockquote><p>kubectl apply -n argocd -f <a href=https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml>https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml</a></p></blockquote><ol start=3><li>暴露 Argo CD 服务</li></ol><blockquote><p>kubectl patch svc argocd-server -n argocd -p &lsquo;{&ldquo;spec&rdquo;: {&ldquo;type&rdquo;: &ldquo;NodePort&rdquo;}}&rsquo;</p></blockquote><ol start=4><li>获取初始密码并登录</li></ol><blockquote><p>kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-echo &ldquo;用户名: admin&rdquo;</p></blockquote><ol start=5><li>进入 Argo CD 连接github 仓库 建应用
-登入Argo CD Web 界面</li></ol><p>左侧菜单 → Settings → Repositories。
-点击右上角 + Connect Repo。
-选择连接方式：HTTPS：输入仓库 URL、Username、Password（PAT）。
-SSH：输入 <a href=mailto:git@github.com>git@github.com</a>:kx-ops/thinkphp.git，并粘贴私钥内容。
-点击 Connect，测试通过后保存。</p><p>建应用 NEW APP<br>填写：Application Name: my-app<br>Project: default<br>Sync Policy: Automated（开启自动同步）<br>Repository URL: 你的部署 Git 仓库<br>Path: k8s（或具体子目录）<br>Cluster: <a href=https://kubernetes.default.svc>https://kubernetes.default.svc</a><br>Namespace: default</p><p>点击 CREATE，然后 SYNC。</p><p>这样就即大功告成</p></div><footer class=post-footer><ul class=post-tags></ul></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://kxops.com/>kxops</a></span> ·
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
-</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>

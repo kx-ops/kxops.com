@@ -5,7 +5,7 @@ theme = 'PaperMod'
 
 [params]
   mainSections = ["posts"]   
-  mermaid = true
+  mermaid = ["true"] 
 
 [params.assets]
   disableFingerprinting = true

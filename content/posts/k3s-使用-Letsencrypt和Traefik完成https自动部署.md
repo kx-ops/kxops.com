@@ -172,22 +172,29 @@ nginx-service   ClusterIP   10.43.102.65   <none>        80/TCP    75s
 cat ingress.yml
 ```
 ~~~yaml
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: nginx-tls
-  namespace: nginx  
+    annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+    name: nginx-ingress
+    namespace: nginx
 spec:
-  entryPoints:
-    - websecure
-  routes:
-  - match: Host(`nginx.kxops.com`) 
-    kind: Rule
-    services:
-    - name: nginx-service
-      port: 80
   tls:
-    certResolver: myresolver #
+    - secretName: nginx-kxops-com-dev-tls
+      hosts:
+        - nginx.kxops.com
+  rules:
+  - host: nginx.kxops.com
+    http:
+      paths:
+        - pathType: Prefix
+          path: /
+          backend:
+            service:
+              name: nginx-service
+              port:
+                number: 80
 ~~~
 这个 ingress 会将流量路由到对应 service 的80 端口，之后进入对应的 pod 中，部署并查看一下吧：
 ```bash

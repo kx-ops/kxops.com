@@ -33,31 +33,29 @@
 可以使用下面指令拉取&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;docker pull ghcr.io/kx-ops/thinkphp:91b2e9f9f579a7c9eb44e065b8696421339f4fed
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;打包Debian 11 nginx unitd 1.3 + php 7.4.33 (非常老的版本)&lt;/p&gt;
-&lt;p&gt;流程&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph LR
-%% 节点定义
-Developer[代码提交]
-Github[Github Repository]
-GHA[Github Actions CI]
-GHCR[(Github Packages)]
-Manifest[k8s/deploy.yaml 更新]
-ArgoCD[ArgoCD]
-K8s[K8s 集群]
-%% 流程连接
-Developer --&amp;gt;|git push| Github
-Github --&amp;gt;|触发 Workflow| GHA
-GHA --&amp;gt;|构建镜相| GHCR
-GHA --&amp;gt;|更新镜相| Manifest
-Manifest --&amp;gt;|监听变化| ArgoCD
-ArgoCD --&amp;gt;|拉取/应用| K8s
-%% 样式美化
-style Github fill:#f9f,stroke:#333
-style GHCR fill:#bbf,stroke:#333
-style ArgoCD fill:#f96,stroke:#333
-style K8s fill:#7cf,stroke:#333
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;1 . 代码提交 &amp;mdash;&amp;ndash; Github&lt;br&gt;
+&lt;p&gt;流程
+&lt;img alt="GitOps 流程图" loading="lazy" src="https://kxops.com/img/flow.png"&gt;&lt;/p&gt;
+&lt;p&gt;1 . 代码提交 &amp;mdash;&amp;ndash; Github&lt;br&gt;
 2 . 打包镜相CI &amp;mdash;&amp;ndash; 根据Dockerfile 打包 Github Packages 并更新k8s/deploy.yaml 文件中的images ID&lt;br&gt;
-3 . 持续部署CD &amp;mdash;&amp;ndash; ArgoCD 监听 Github 仓库中的 k8s/deploy.yaml 变化 部署到K8s集群&lt;/p&gt;</description></item><item><title>K3s安装文档</title><link>https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</link><pubDate>Sun, 26 Apr 2026 22:39:53 +0800</pubDate><guid>https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</guid><description>&lt;p&gt;国内用户，可以使用以下方法加速安装:&lt;/p&gt;
+3 . 持续部署CD &amp;mdash;&amp;ndash; ArgoCD 监听 Github 仓库中的 k8s/deploy.yaml 变化 部署到K8s集群&lt;/p&gt;
+&lt;p&gt;前提条件：
+设置 GitHub 仓库 GitHub Personal Access Token（PAT）具有 write:packages 权限&lt;br&gt;
+生成一个SSH KEY 用于argo CD 连github 并注入到github 用户 SSH中&lt;/p&gt;
+&lt;p&gt;代码结构&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;treeView-beta
+&amp;#34;thinkphp&amp;#34;
+&amp;#34;.dockerignore&amp;#34;
+&amp;#34;.gitignore&amp;#34;
+&amp;#34;.github&amp;#34;
+&amp;#34;workflows&amp;#34;
+&amp;#34;main.yaml&amp;#34;
+&amp;#34;public&amp;#34;
+&amp;#34;k8s&amp;#34;
+&amp;#34;deploy.yaml&amp;#34;
+&amp;#34;Docker&amp;#34;
+&amp;#34;Dockerfile&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;略去K8s 安装&lt;br&gt;
+记录 ArgoCD 安装过程&lt;/p&gt;</description></item><item><title>K3s安装文档</title><link>https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</link><pubDate>Sun, 26 Apr 2026 22:39:53 +0800</pubDate><guid>https://kxops.com/posts/k3s%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</guid><description>&lt;p&gt;国内用户，可以使用以下方法加速安装:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;curl -sfL &lt;a href="https://rancher-mirror.rancher.cn/k3s/k3s-install.sh"&gt;https://rancher-mirror.rancher.cn/k3s/k3s-install.sh&lt;/a&gt; |INSTALL_K3S_EXEC=&amp;rsquo;&amp;ndash;flannel-backend=none &amp;ndash;disable-network-policy&amp;rsquo; INSTALL_K3S_MIRROR=cn sh -&lt;/p&gt;
 &lt;/blockquote&gt;

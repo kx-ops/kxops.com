@@ -11,6 +11,8 @@ Thumbs.db
 *.swp
 *.bak
 
+themes/
 content/
 hugo.toml
 archetypes/
+.hugo_build.lock

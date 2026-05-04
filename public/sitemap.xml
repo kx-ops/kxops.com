@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2026-05-02T09:51:53+08:00</lastmod>
+    <loc>https://kxops.com/posts/git%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2026-05-04T09:11:37+08:00</lastmod>
   </url><url>
     <loc>https://kxops.com/</loc>
-    <lastmod>2026-05-02T09:51:53+08:00</lastmod>
+    <lastmod>2026-05-04T09:11:37+08:00</lastmod>
   </url><url>
     <loc>https://kxops.com/posts/</loc>
+    <lastmod>2026-05-04T09:11:37+08:00</lastmod>
+  </url><url>
+    <loc>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2026-05-02T09:51:53+08:00</lastmod>
   </url><url>
     <loc>https://kxops.com/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</loc>

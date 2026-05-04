@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>kxops</title>
-    <link>http://localhost:1313/</link>
+    <link>https://kxops.com/</link>
     <description>Recent content on kxops</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 02 May 2026 09:51:53 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://kxops.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GitOps 基本知识入门笔记</title>
-      <link>http://localhost:1313/posts/gitops%E5%9F%BA%E7%A1%80/</link>
+      <link>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Sat, 02 May 2026 09:51:53 +0800</pubDate>
-      <guid>http://localhost:1313/posts/gitops%E5%9F%BA%E7%A1%80/</guid>
+      <guid>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</guid>
       <description>&lt;p&gt;&lt;img alt=&#34;GitOps&#34; loading=&#34;lazy&#34; src=&#34;https://learn.microsoft.com/ko-kr/azure/architecture/example-scenario/gitops-aks/media/gitops-ci-cd-argo-cd.png&#34; title=&#34;GitOps流程示意图&#34;&gt;
 GitOps 是一种基于 Git 仓库来管理 Kubernetes 集群和应用程序交付的现代化 DevOps 实践。核心是将 Git 作为基础设施和应用配置的“唯一源”，通过声明式（YAML）描述期望状态，利用 Git 的版本控制特性实现自动化拉取（Pull）和持续部署。主流工具为 Argo CD 和 Flux。&lt;/p&gt;
 &lt;h3 id=&#34;gitops-的核心原则声明式&#34;&gt;GitOps 的核心原则声明式：&lt;/h3&gt;
@@ -41,9 +41,9 @@ GitOps 是一种基于 Git 仓库来管理 Kubernetes 集群和应用程序交�
     </item>
     <item>
       <title>k8s使用 Letsencrypt 和 Traefik 实现 https 自动部署</title>
-      <link>http://localhost:1313/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</link>
+      <link>https://kxops.com/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Fri, 01 May 2026 16:50:13 +0800</pubDate>
-      <guid>http://localhost:1313/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</guid>
+      <guid>https://kxops.com/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</guid>
       <description>&lt;p&gt;k3s 使用 Letsencrypt 和 Traefik 完成 https 入口部署&lt;/p&gt;
 &lt;h3 id=&#34;内容提要&#34;&gt;内容提要&lt;/h3&gt;
 &lt;p&gt;本文介绍 cert-manager 插件的安装，之后以一个简单的 web 服务部署为例，演示 https 服务的部署过程。&lt;/p&gt;
@@ -78,9 +78,9 @@ GitOps 是一种基于 Git 仓库来管理 Kubernetes 集群和应用程序交�
     </item>
     <item>
       <title>About</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://kxops.com/about/</link>
       <pubDate>Sun, 26 Apr 2026 13:27:47 +0800</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://kxops.com/about/</guid>
       <description>&lt;h2 id=&#34;专注于运维自动化&#34;&gt;专注于运维自动化&lt;/h2&gt;
 &lt;h3 id=&#34;k8s-ci-cd-gitops--相关技术&#34;&gt;K8s CI CD GitOPS  相关技术&lt;/h3&gt;
 &lt;h1&gt;&lt;/h1&gt;
@@ -88,9 +88,9 @@ GitOps 是一种基于 Git 仓库来管理 Kubernetes 集群和应用程序交�
     </item>
     <item>
       <title>Hello World</title>
-      <link>http://localhost:1313/posts/hello-world/</link>
+      <link>https://kxops.com/posts/hello-world/</link>
       <pubDate>Sun, 26 Apr 2026 13:25:22 +0800</pubDate>
-      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <guid>https://kxops.com/posts/hello-world/</guid>
       <description>&lt;h5&gt;&lt;/h5&gt;
 &lt;p&gt;Hello World  &amp;hellip;
 你好 世界 ！！！！！&lt;/p&gt;</description>

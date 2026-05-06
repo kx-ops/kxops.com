@@ -4,7 +4,7 @@ vscode/
 .run/
 archetypes/
 resources/
-theme/
+themes/
 content/
 .hugo_build.lock
 hugo.toml

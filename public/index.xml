@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>kxops</title><link>https://kxops.com/</link><description>Recent content on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 02 May 2026 09:51:53 +0800</lastBuildDate><atom:link href="https://kxops.com/index.xml" rel="self" type="application/rss+xml"/><item><title>GitOps 基本知识入门笔记</title><link>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</link><pubDate>Sat, 02 May 2026 09:51:53 +0800</pubDate><guid>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</guid><description>&lt;p&gt;&lt;img alt="GitOps" loading="lazy" src="https://learn.microsoft.com/ko-kr/azure/architecture/example-scenario/gitops-aks/media/gitops-ci-cd-argo-cd.png" title="GitOps流程示意图"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>kxops</title><link>https://kxops.com/</link><description>Recent content on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 06 May 2026 23:14:04 +0800</lastBuildDate><atom:link href="https://kxops.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Argocd 简述及使用 上</title><link>https://kxops.com/posts/about-argocd/</link><pubDate>Wed, 06 May 2026 23:14:04 +0800</pubDate><guid>https://kxops.com/posts/about-argocd/</guid><description>&lt;p&gt;ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
+&lt;img alt="argocd 架构图" loading="lazy" src="https://cdn.shortpixel.ai/spai/w_1248+q_lossless+ret_img+to_webp/www.apptio.com/wp-content/uploads/argocd-arch.png"&gt;&lt;/p&gt;
+&lt;h4 id="官方说明"&gt;官方说明&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Why Argo CD? 为什么选择 ArgoCD
+1. Application definitions, configurations, and environments should be declarative and version controlled.
+让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。
+2. Application deployment and lifecycle management should be automated, auditable, and easy to understand.
+定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。&lt;/p&gt;
+&lt;p&gt;下面简单介绍下 Argo CD 中的几个主要组件：&lt;/p&gt;
+&lt;p&gt;一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;应用程序管理和状态报告&lt;/li&gt;
+&lt;li&gt;执行应用程序操作（例如同步、回滚、用户定义的操作）&lt;/li&gt;
+&lt;li&gt;存储仓库和集群凭据管理（存储为 K8S Secrets 对象）&lt;/li&gt;
+&lt;li&gt;认证和授权给外部身份提供者&lt;/li&gt;
+&lt;li&gt;RBAC&lt;/li&gt;
+&lt;li&gt;Git webhook 事件的侦听器/转发器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：&lt;/p&gt;</description></item><item><title>GitOps 基本知识入门笔记</title><link>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</link><pubDate>Sat, 02 May 2026 09:51:53 +0800</pubDate><guid>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</guid><description>&lt;p&gt;&lt;img alt="GitOps" loading="lazy" src="https://learn.microsoft.com/ko-kr/azure/architecture/example-scenario/gitops-aks/media/gitops-ci-cd-argo-cd.png" title="GitOps流程示意图"&gt;
 GitOps 是一种基于 Git 仓库来管理 Kubernetes 集群和应用程序交付的现代化 DevOps 实践。核心是将 Git 作为基础设施和应用配置的“唯一源”，通过声明式（YAML）描述期望状态，利用 Git 的版本控制特性实现自动化拉取（Pull）和持续部署。主流工具为 Argo CD 和 Flux。&lt;/p&gt;
 &lt;h3 id="gitops-的核心原则声明式"&gt;GitOps 的核心原则声明式：&lt;/h3&gt;
 &lt;ol&gt;

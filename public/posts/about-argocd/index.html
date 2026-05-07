@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Argocd 简述及使用 上 | kxops</title>
-<meta name="keywords" content="">
-<meta name="description" content="ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
+<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Argocd 简述及使用 上 | kxops</title><meta name=keywords content><meta name=description content="ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
 
 官方说明
 Why Argo CD? 为什么选择 ArgoCD 
@@ -26,224 +17,21 @@ Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，
 RBAC
 Git webhook 事件的侦听器/转发器
 
-二.  仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：">
-<meta name="author" content="">
-<link rel="canonical" href="https://kxops.com/posts/about-argocd/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://kxops.com/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://kxops.com/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://kxops.com/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://kxops.com/apple-touch-icon.png">
-<link rel="mask-icon" href="https://kxops.com/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://kxops.com/posts/about-argocd/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-                color-scheme: dark;
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .toc {
-                background: var(--entry);
-            }
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else if (localStorage.getItem("pref-theme") === "light") {
-       document.querySelector("html").dataset.theme = 'light';
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.querySelector("html").dataset.theme = 'dark';
-    } else {
-        document.querySelector("html").dataset.theme = 'light';
-    }
-
-</script><meta property="og:url" content="https://kxops.com/posts/about-argocd/">
-  <meta property="og:site_name" content="kxops">
-  <meta property="og:title" content="Argocd 简述及使用 上">
-  <meta property="og:description" content="ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。 官方说明 Why Argo CD? 为什么选择 ArgoCD 1. Application definitions, configurations, and environments should be declarative and version controlled. 让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。 2. Application deployment and lifecycle management should be automated, auditable, and easy to understand. 定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。 Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。
+二.  仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单："><meta name=author content><link rel=canonical href=https://kxops.com/posts/about-argocd/><link crossorigin=anonymous href=/assets/css/stylesheet.css rel="preload stylesheet" as=style><link rel=icon href=https://kxops.com/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://kxops.com/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://kxops.com/favicon-32x32.png><link rel=apple-touch-icon href=https://kxops.com/apple-touch-icon.png><link rel=mask-icon href=https://kxops.com/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://kxops.com/posts/about-argocd/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://kxops.com/posts/about-argocd/"><meta property="og:site_name" content="kxops"><meta property="og:title" content="Argocd 简述及使用 上"><meta property="og:description" content="ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。 官方说明 Why Argo CD? 为什么选择 ArgoCD 1. Application definitions, configurations, and environments should be declarative and version controlled. 让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。 2. Application deployment and lifecycle management should be automated, auditable, and easy to understand. 定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。 Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。
 下面简单介绍下 Argo CD 中的几个主要组件：
 一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：
-应用程序管理和状态报告 执行应用程序操作（例如同步、回滚、用户定义的操作） 存储仓库和集群凭据管理（存储为 K8S Secrets 对象） 认证和授权给外部身份提供者 RBAC Git webhook 事件的侦听器/转发器 二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-05-06T23:14:04+08:00">
-    <meta property="article:modified_time" content="2026-05-06T23:14:04+08:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Argocd 简述及使用 上">
-  <meta name="twitter:description" content="ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。 官方说明 Why Argo CD? 为什么选择 ArgoCD 1. Application definitions, configurations, and environments should be declarative and version controlled. 让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。 2. Application deployment and lifecycle management should be automated, auditable, and easy to understand. 定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。 Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。
+应用程序管理和状态报告 执行应用程序操作（例如同步、回滚、用户定义的操作） 存储仓库和集群凭据管理（存储为 K8S Secrets 对象） 认证和授权给外部身份提供者 RBAC Git webhook 事件的侦听器/转发器 二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单："><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-05-06T23:14:04+08:00"><meta property="article:modified_time" content="2026-05-06T23:14:04+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Argocd 简述及使用 上"><meta name=twitter:description content="ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。 官方说明 Why Argo CD? 为什么选择 ArgoCD 1. Application definitions, configurations, and environments should be declarative and version controlled. 让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。 2. Application deployment and lifecycle management should be automated, auditable, and easy to understand. 定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。 Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。
 下面简单介绍下 Argo CD 中的几个主要组件：
 一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：
-应用程序管理和状态报告 执行应用程序操作（例如同步、回滚、用户定义的操作） 存储仓库和集群凭据管理（存储为 K8S Secrets 对象） 认证和授权给外部身份提供者 RBAC Git webhook 事件的侦听器/转发器 二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://kxops.com/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Argocd 简述及使用 上",
-      "item": "https://kxops.com/posts/about-argocd/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Argocd 简述及使用 上",
-  "name": "Argocd 简述及使用 上",
-  "description": "ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。 官方说明 Why Argo CD? 为什么选择 ArgoCD 1. Application definitions, configurations, and environments should be declarative and version controlled. 让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。 2. Application deployment and lifecycle management should be automated, auditable, and easy to understand. 定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。 Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。\n下面简单介绍下 Argo CD 中的几个主要组件：\n一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：\n应用程序管理和状态报告 执行应用程序操作（例如同步、回滚、用户定义的操作） 存储仓库和集群凭据管理（存储为 K8S Secrets 对象） 认证和授权给外部身份提供者 RBAC Git webhook 事件的侦听器/转发器 二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：\n",
-  "keywords": [
-    
-  ],
-  "articleBody": "ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。 官方说明 Why Argo CD? 为什么选择 ArgoCD 1. Application definitions, configurations, and environments should be declarative and version controlled. 让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。 2. Application deployment and lifecycle management should be automated, auditable, and easy to understand. 定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。 Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。\n下面简单介绍下 Argo CD 中的几个主要组件：\n一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：\n应用程序管理和状态报告 执行应用程序操作（例如同步、回滚、用户定义的操作） 存储仓库和集群凭据管理（存储为 K8S Secrets 对象） 认证和授权给外部身份提供者 RBAC Git webhook 事件的侦听器/转发器 二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：\n存储 URL revision 版本（commit、tag、branch） 应用路径 模板配置：参数、ksonnet 环境、helm values.yaml 等 三 . 应用控制器：应用控制器是一个 Kubernetes 控制器，它持续 watch 正在运行的应用程序并将当前的实时状态与所期望的目标状态（ repo 中指定的）进行比较。它检测应用程序的 OutOfSync 状态，并采取一些措施来同步状态，它负责调用任何用户定义的生命周期事件的钩子（PreSync、Sync、PostSync）。\nArgoCD 功能 自动部署应用程序到指定的目标环境 支持多种配置管理/模板工具（Kustomize、Helm、Ksonnet、Jsonnet、plain-YAML） 能够管理和部署到多个集群 SSO 集成（OIDC、OAuth2、LDAP、SAML 2.0、GitHub、GitLab、Microsoft、LinkedIn） 用于授权的多租户和 RBAC 策略 回滚/随时回滚到 Git 存储库中提交的任何应用配置 应用资源的健康状况分析 自动配置检测和可视化 自动或手动将应用程序同步到所需状态 提供应用程序活动实时视图的 Web UI 用于自动化和 CI 集成的 CLI Webhook 集成（GitHub、BitBucket、GitLab） 用于自动化的 AccessTokens PreSync、Sync、PostSync Hooks，以支持复杂的应用程序部署（例如蓝/绿和金丝雀发布） 应用程序事件和 API 调用的审计 Prometheus 监控指标 用于覆盖 Git 中的 ksonnet/helm 参数 核心概念 Application：应用，一组由资源清单定义的 Kubernetes 资源，这是一个 CRD 资源对象 Application source type：用来构建应用的工具 Target state：目标状态，指应用程序所需的期望状态，由 Git 存储库中的文件表示 Live state：实时状态，指应用程序实时的状态，比如部署了哪些 Pods 等真实状态 Sync status：同步状态表示实时状态是否与目标状态一致，部署的应用是否与 Git 所描述的一样？ Sync：同步指将应用程序迁移到其目标状态的过程，比如通过对 Kubernetes 集群应用变更 Sync operation status：同步操作状态指的是同步是否成功 Refresh：刷新是指将 Git 中的最新代码与实时状态进行比较，弄清楚有什么不同 Health：应用程序的健康状况，它是否正常运行？能否为请求提供服务？ Tool：工具指从文件目录创建清单的工具，例如 Kustomize 或 Ksonnet 等 Configuration management tool：配置管理工具 Configuration management plugin：配置管理插件 安装非常简易 二行指令 kubectl create namespace argocd kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml 下期写argocd 使用过程\n",
-  "wordCount" : "195",
-  "inLanguage": "en",
-  "datePublished": "2026-05-06T23:14:04+08:00",
-  "dateModified": "2026-05-06T23:14:04+08:00",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://kxops.com/posts/about-argocd/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "kxops",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://kxops.com/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="header-nav">
-        <div class="logo">
-            <a href="https://kxops.com/" accesskey="h" title="kxops (Alt + H)">kxops</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu" class="menu">
-            <li>
-                <a href="https://kxops.com/" title="首页">
-                    <span>首页</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://kxops.com/archives/" title="归档">
-                    <span>归档</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://kxops.com/about/" title="关于">
-                    <span>关于</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    
-    <h1 class="post-title entry-hint-parent">
-      Argocd 简述及使用 上
-    </h1>
-    <div class="post-meta">
-
-<span title='2026-05-06 23:14:04 +0800 CST'>May 6, 2026</span>
-
-</div>
-  </header> 
-  <div class="post-content md-content"><p>ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
-<img alt="argocd 架构图" loading="lazy" src="https://cdn.shortpixel.ai/spai/w_1248+q_lossless+ret_img+to_webp/www.apptio.com/wp-content/uploads/argocd-arch.png"></p>
-<h4 id="官方说明">官方说明<a hidden class="anchor" aria-hidden="true" href="#官方说明">#</a></h4>
-<pre tabindex="0"><code>Why Argo CD? 为什么选择 ArgoCD 
+应用程序管理和状态报告 执行应用程序操作（例如同步、回滚、用户定义的操作） 存储仓库和集群凭据管理（存储为 K8S Secrets 对象） 认证和授权给外部身份提供者 RBAC Git webhook 事件的侦听器/转发器 二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单："><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://kxops.com/posts/"},{"@type":"ListItem","position":2,"name":"Argocd 简述及使用 上","item":"https://kxops.com/posts/about-argocd/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Argocd 简述及使用 上","name":"Argocd 简述及使用 上","description":"ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。 官方说明 Why Argo CD? 为什么选择 ArgoCD 1. Application definitions, configurations, and environments should be declarative and version controlled. 让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。 2. Application deployment and lifecycle management should be automated, auditable, and easy to understand. 定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。 Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。\n下面简单介绍下 Argo CD 中的几个主要组件：\n一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：\n应用程序管理和状态报告 执行应用程序操作（例如同步、回滚、用户定义的操作） 存储仓库和集群凭据管理（存储为 K8S Secrets 对象） 认证和授权给外部身份提供者 RBAC Git webhook 事件的侦听器/转发器 二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：\n","keywords":[],"articleBody":"ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。 官方说明 Why Argo CD? 为什么选择 ArgoCD 1. Application definitions, configurations, and environments should be declarative and version controlled. 让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。 2. Application deployment and lifecycle management should be automated, auditable, and easy to understand. 定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。 Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。\n下面简单介绍下 Argo CD 中的几个主要组件：\n一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：\n应用程序管理和状态报告 执行应用程序操作（例如同步、回滚、用户定义的操作） 存储仓库和集群凭据管理（存储为 K8S Secrets 对象） 认证和授权给外部身份提供者 RBAC Git webhook 事件的侦听器/转发器 二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：\n存储 URL revision 版本（commit、tag、branch） 应用路径 模板配置：参数、ksonnet 环境、helm values.yaml 等 三 . 应用控制器：应用控制器是一个 Kubernetes 控制器，它持续 watch 正在运行的应用程序并将当前的实时状态与所期望的目标状态（ repo 中指定的）进行比较。它检测应用程序的 OutOfSync 状态，并采取一些措施来同步状态，它负责调用任何用户定义的生命周期事件的钩子（PreSync、Sync、PostSync）。\nArgoCD 功能 自动部署应用程序到指定的目标环境 支持多种配置管理/模板工具（Kustomize、Helm、Ksonnet、Jsonnet、plain-YAML） 能够管理和部署到多个集群 SSO 集成（OIDC、OAuth2、LDAP、SAML 2.0、GitHub、GitLab、Microsoft、LinkedIn） 用于授权的多租户和 RBAC 策略 回滚/随时回滚到 Git 存储库中提交的任何应用配置 应用资源的健康状况分析 自动配置检测和可视化 自动或手动将应用程序同步到所需状态 提供应用程序活动实时视图的 Web UI 用于自动化和 CI 集成的 CLI Webhook 集成（GitHub、BitBucket、GitLab） 用于自动化的 AccessTokens PreSync、Sync、PostSync Hooks，以支持复杂的应用程序部署（例如蓝/绿和金丝雀发布） 应用程序事件和 API 调用的审计 Prometheus 监控指标 用于覆盖 Git 中的 ksonnet/helm 参数 核心概念 Application：应用，一组由资源清单定义的 Kubernetes 资源，这是一个 CRD 资源对象 Application source type：用来构建应用的工具 Target state：目标状态，指应用程序所需的期望状态，由 Git 存储库中的文件表示 Live state：实时状态，指应用程序实时的状态，比如部署了哪些 Pods 等真实状态 Sync status：同步状态表示实时状态是否与目标状态一致，部署的应用是否与 Git 所描述的一样？ Sync：同步指将应用程序迁移到其目标状态的过程，比如通过对 Kubernetes 集群应用变更 Sync operation status：同步操作状态指的是同步是否成功 Refresh：刷新是指将 Git 中的最新代码与实时状态进行比较，弄清楚有什么不同 Health：应用程序的健康状况，它是否正常运行？能否为请求提供服务？ Tool：工具指从文件目录创建清单的工具，例如 Kustomize 或 Ksonnet 等 Configuration management tool：配置管理工具 Configuration management plugin：配置管理插件 安装非常简易 二行指令 kubectl create namespace argocd kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml 下期写argocd 使用过程\n","wordCount":"195","inLanguage":"en","datePublished":"2026-05-06T23:14:04+08:00","dateModified":"2026-05-06T23:14:04+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kxops.com/posts/about-argocd/"},"publisher":{"@type":"Organization","name":"kxops","logo":{"@type":"ImageObject","url":"https://kxops.com/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://kxops.com/ accesskey=h title="kxops (Alt + H)">kxops</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://kxops.com/ title=首页><span>首页</span></a></li><li><a href=https://kxops.com/archives/ title=归档><span>归档</span></a></li><li><a href=https://kxops.com/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><h1 class="post-title entry-hint-parent">Argocd 简述及使用 上</h1><div class=post-meta><span title='2026-05-06 23:14:04 +0800 CST'>May 6, 2026</span></div></header><div class="post-content md-content"><p>ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
+<img alt="argocd 架构图" loading=lazy src=https://cdn.shortpixel.ai/spai/w_1248+q_lossless+ret_img+to_webp/www.apptio.com/wp-content/uploads/argocd-arch.png></p><h4 id=官方说明>官方说明<a hidden class=anchor aria-hidden=true href=#官方说明>#</a></h4><pre tabindex=0><code>Why Argo CD? 为什么选择 ArgoCD 
 1. Application definitions, configurations, and environments should be declarative and version controlled.
 让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。
 2. Application deployment and lifecycle management should be automated, auditable, and easy to understand.
 定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。
-</code></pre><p>Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。</p>
-<p>下面简单介绍下 Argo CD 中的几个主要组件：</p>
-<p>一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：</p>
-<ol>
-<li>应用程序管理和状态报告</li>
-<li>执行应用程序操作（例如同步、回滚、用户定义的操作）</li>
-<li>存储仓库和集群凭据管理（存储为 K8S Secrets 对象）</li>
-<li>认证和授权给外部身份提供者</li>
-<li>RBAC</li>
-<li>Git webhook 事件的侦听器/转发器</li>
-</ol>
-<p>二.  仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：</p>
-<ol>
-<li>存储 URL</li>
-<li>revision 版本（commit、tag、branch）</li>
-<li>应用路径</li>
-<li>模板配置：参数、ksonnet 环境、helm values.yaml 等</li>
-</ol>
-<p>三 . 应用控制器：应用控制器是一个 Kubernetes 控制器，它持续 watch 正在运行的应用程序并将当前的实时状态与所期望的目标状态（ repo 中指定的）进行比较。它检测应用程序的 OutOfSync 状态，并采取一些措施来同步状态，它负责调用任何用户定义的生命周期事件的钩子（PreSync、Sync、PostSync）。</p>
-<h3 id="argocd-功能">ArgoCD 功能<a hidden class="anchor" aria-hidden="true" href="#argocd-功能">#</a></h3>
-<pre tabindex="0"><code>自动部署应用程序到指定的目标环境
+</code></pre><p>Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。</p><p>下面简单介绍下 Argo CD 中的几个主要组件：</p><p>一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：</p><ol><li>应用程序管理和状态报告</li><li>执行应用程序操作（例如同步、回滚、用户定义的操作）</li><li>存储仓库和集群凭据管理（存储为 K8S Secrets 对象）</li><li>认证和授权给外部身份提供者</li><li>RBAC</li><li>Git webhook 事件的侦听器/转发器</li></ol><p>二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：</p><ol><li>存储 URL</li><li>revision 版本（commit、tag、branch）</li><li>应用路径</li><li>模板配置：参数、ksonnet 环境、helm values.yaml 等</li></ol><p>三 . 应用控制器：应用控制器是一个 Kubernetes 控制器，它持续 watch 正在运行的应用程序并将当前的实时状态与所期望的目标状态（ repo 中指定的）进行比较。它检测应用程序的 OutOfSync 状态，并采取一些措施来同步状态，它负责调用任何用户定义的生命周期事件的钩子（PreSync、Sync、PostSync）。</p><h3 id=argocd-功能>ArgoCD 功能<a hidden class=anchor aria-hidden=true href=#argocd-功能>#</a></h3><pre tabindex=0><code>自动部署应用程序到指定的目标环境
 支持多种配置管理/模板工具（Kustomize、Helm、Ksonnet、Jsonnet、plain-YAML）
 能够管理和部署到多个集群
 SSO 集成（OIDC、OAuth2、LDAP、SAML 2.0、GitHub、GitLab、Microsoft、LinkedIn）
@@ -260,8 +48,7 @@ PreSync、Sync、PostSync Hooks，以支持复杂的应用程序部署（例如�
 应用程序事件和 API 调用的审计
 Prometheus 监控指标
 用于覆盖 Git 中的 ksonnet/helm 参数
-</code></pre><h3 id="核心概念">核心概念<a hidden class="anchor" aria-hidden="true" href="#核心概念">#</a></h3>
-<pre tabindex="0"><code>Application：应用，一组由资源清单定义的 Kubernetes 资源，这是一个 CRD 资源对象
+</code></pre><h3 id=核心概念>核心概念<a hidden class=anchor aria-hidden=true href=#核心概念>#</a></h3><pre tabindex=0><code>Application：应用，一组由资源清单定义的 Kubernetes 资源，这是一个 CRD 资源对象
 Application source type：用来构建应用的工具
 Target state：目标状态，指应用程序所需的期望状态，由 Git 存储库中的文件表示
 Live state：实时状态，指应用程序实时的状态，比如部署了哪些 Pods 等真实状态
@@ -273,99 +60,10 @@ Health：应用程序的健康状况，它是否正常运行？能否为请求�
 Tool：工具指从文件目录创建清单的工具，例如 Kustomize 或 Ksonnet 等
 Configuration management tool：配置管理工具
 Configuration management plugin：配置管理插件
-</code></pre><h3 id="安装非常简易-二行指令">安装非常简易 二行指令<a hidden class="anchor" aria-hidden="true" href="#安装非常简易-二行指令">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace argocd
-</span></span><span style="display:flex;"><span>kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-</span></span></code></pre></div><p>下期写argocd 使用过程</p>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-  </footer>
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>&copy; 2026 <a href="https://kxops.com/">kxops</a></span> · 
-
-    
-    
-    <span>
-        Powered by
-        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
-        <polyline points="17 11 12 6 7 11"></polyline>
-        <polyline points="17 18 12 13 7 18"></polyline>
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu');
-    if (menu) {
-        
-        const scrollPosition = localStorage.getItem("menu-scroll-position");
-        if (scrollPosition) {
-            menu.scrollLeft = parseInt(scrollPosition, 10);
-        }
-        
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var toplink = document.getElementById("top-link");
-    window.onscroll = function () {
-        const scrollThreshold = window.innerHeight;
-        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
-            toplink.classList.remove("hidden");
-        } else {
-            toplink.classList.add("hidden");
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        const html = document.querySelector("html");
-        if (html.dataset.theme === "dark") {
-            html.dataset.theme = 'light';
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            html.dataset.theme = 'dark';
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-</body>
-
-</html>
+</code></pre><h3 id=安装非常简易-二行指令>安装非常简易 二行指令<a hidden class=anchor aria-hidden=true href=#安装非常简易-二行指令>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>kubectl create namespace argocd
+</span></span><span style=display:flex><span>kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+</span></span></code></pre></div><p>下期写argocd 使用过程</p></div><footer class=post-footer><ul class=post-tags></ul></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://kxops.com/>kxops</a></span> ·
+<span>Powered by
+<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>

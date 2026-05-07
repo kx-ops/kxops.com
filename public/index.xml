@@ -17,15 +17,19 @@
 &lt;li&gt;cloudflare监控 github.com/kx-ops/kxops.com 变动更新网站&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id="本地电脑安装-hugo-及使用过程"&gt;本地电脑安装 hugo 及使用过程&lt;/h3&gt;
-&lt;p&gt;最新Windows版下载地址
+&lt;p&gt;安装最新Windows版 hugo 下载地址
 &lt;a href="https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip"&gt;https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;下完 解压到 d:\hugo 下
-在命令提示输入&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-cmd" data-lang="cmd"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;cd&lt;/span&gt; /d D:\hugo\kxops.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo new site kxops.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;cd&lt;/span&gt; kxops.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo new posts/hello-world.md ##这儿就可以创建第一个文档helloworld了
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;用vscode 打开 d:\hugo\kxops.com\posts\hello-world.md 编写即可&lt;/p&gt;</description></item><item><title>About Me</title><link>https://kxops.com/about/</link><pubDate>Thu, 07 May 2026 10:50:51 +0800</pubDate><guid>https://kxops.com/about/</guid><description>&lt;h2 id="im-leif"&gt;I&amp;rsquo;m Leif&lt;/h2&gt;
+&lt;p&gt;安装windows 版 git
+&lt;a href="https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe"&gt;https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;打开环境变量设置
+点击 Windows 开始菜单，直接输入 “环境变量”。
+选择 “编辑系统环境变量”&lt;/p&gt;
+&lt;p&gt;在弹出的窗口中，点击右下角的 “环境变量” 按钮。
+第三步：修改 Path 变量
+在“系统变量” 栏中，找到名为 Path 的变量，双击它。
+在弹出的窗口右侧点击 “新建”。
+将你第一步复制的d:\Hugo 文件夹路径 粘贴进去。
+依次点击 “确定” 保存所有窗口。&lt;/p&gt;</description></item><item><title>About Me</title><link>https://kxops.com/about/</link><pubDate>Thu, 07 May 2026 10:50:51 +0800</pubDate><guid>https://kxops.com/about/</guid><description>&lt;h2 id="im-leif"&gt;I&amp;rsquo;m Leif&lt;/h2&gt;
 &lt;p&gt;GitOps &amp;amp; SRE 工程师，kxops 专注于云原生架构与高性能基础设施优化&lt;/p&gt;
 &lt;h2 id="技术栈"&gt;技术栈&lt;/h2&gt;
 &lt;ul&gt;

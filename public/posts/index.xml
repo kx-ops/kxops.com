@@ -1,4 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on kxops</title><link>https://kxops.com/posts/</link><description>Recent content in Posts on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 06 May 2026 23:14:04 +0800</lastBuildDate><atom:link href="https://kxops.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Argocd 简述及使用 上</title><link>https://kxops.com/posts/about-argocd/</link><pubDate>Wed, 06 May 2026 23:14:04 +0800</pubDate><guid>https://kxops.com/posts/about-argocd/</guid><description>&lt;p&gt;ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on kxops</title><link>https://kxops.com/posts/</link><description>Recent content in Posts on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 07 May 2026 21:12:42 +0800</lastBuildDate><atom:link href="https://kxops.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>hugo 静态站搭建于Github 运行Cloudflare Workers</title><link>https://kxops.com/posts/hugo-on-github-cloudflare/</link><pubDate>Thu, 07 May 2026 21:12:42 +0800</pubDate><guid>https://kxops.com/posts/hugo-on-github-cloudflare/</guid><description>&lt;h2 id="本站-kxopscom-运行方式"&gt;本站 kxops.com 运行方式&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;建站系统&lt;/strong&gt;: Hugo&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网站存放&lt;/strong&gt;: Github&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网站运行&lt;/strong&gt;: Cloudflare Workers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;使用vscode 作为markdown 编写器
+除了域名外 全部免费 由全球最具生产力软件开发协作平台 Github.com 及 全球最大的网络服务商 Cloudflare.com (人称赛博活佛) 提供加速动力。&lt;/p&gt;
+&lt;p&gt;Cloudflare.com 开通Workers 和 Pages 需要绑银联卡 只需要验证 无费用产生 每日可有10万次点击 免费版详细说明 &lt;a href="https://www.cloudflare.com/zh-cn/plans/developer-platform/"&gt;https://www.cloudflare.com/zh-cn/plans/developer-platform/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Github 只需要注册即可&lt;/p&gt;
+&lt;p&gt;安装部署流程如下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;本地电脑安装 hugo 部署文档&lt;/li&gt;
+&lt;li&gt;产生的文档生成后 通过git push public变动推送到 github.com&lt;/li&gt;
+&lt;li&gt;cloudflare监控 github.com/kx-ops/kxops.com 变动更新网站&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="本地电脑安装-hugo-及使用过程"&gt;本地电脑安装 hugo 及使用过程&lt;/h3&gt;
+&lt;p&gt;最新Windows版下载地址
+&lt;a href="https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip"&gt;https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下完 解压到 d:\hugo 下
+在命令提示输入&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-cmd" data-lang="cmd"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;cd&lt;/span&gt; /d D:\hugo\kxops.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo new site kxops.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;cd&lt;/span&gt; kxops.com
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo new posts/hello-world.md ##这儿就可以创建第一个文档helloworld了
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;用vscode 打开 d:\hugo\kxops.com\posts\hello-world.md 编写即可&lt;/p&gt;</description></item><item><title>Argocd 简述及使用 上</title><link>https://kxops.com/posts/about-argocd/</link><pubDate>Wed, 06 May 2026 23:14:04 +0800</pubDate><guid>https://kxops.com/posts/about-argocd/</guid><description>&lt;p&gt;ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
 &lt;img alt="argocd 架构图" loading="lazy" src="https://cdn.shortpixel.ai/spai/w_1248+q_lossless+ret_img+to_webp/www.apptio.com/wp-content/uploads/argocd-arch.png"&gt;&lt;/p&gt;
 &lt;h4 id="官方说明"&gt;官方说明&lt;/h4&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;Why Argo CD? 为什么选择 ArgoCD

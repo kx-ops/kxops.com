@@ -8,3 +8,11 @@ themes/
 content/
 .hugo_build.lock
 hugo.toml
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
+wrangler.jsonc

@@ -5,7 +5,8 @@
 &lt;li&gt;&lt;strong&gt;容器化&lt;/strong&gt;: Kubernetes, Docker&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;GitOps&lt;/strong&gt;: Argo CD, GitHub Actions&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;系统&lt;/strong&gt;: Debian/Ubuntu&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Argocd 简述及使用 上</title><link>https://kxops.com/posts/about-argocd/</link><pubDate>Wed, 06 May 2026 23:14:04 +0800</pubDate><guid>https://kxops.com/posts/about-argocd/</guid><description>&lt;p&gt;ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="mailto:leif@kxops.com"&gt;电子邮件&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Argocd 简述及使用 上</title><link>https://kxops.com/posts/about-argocd/</link><pubDate>Wed, 06 May 2026 23:14:04 +0800</pubDate><guid>https://kxops.com/posts/about-argocd/</guid><description>&lt;p&gt;ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
 &lt;img alt="argocd 架构图" loading="lazy" src="https://cdn.shortpixel.ai/spai/w_1248+q_lossless+ret_img+to_webp/www.apptio.com/wp-content/uploads/argocd-arch.png"&gt;&lt;/p&gt;
 &lt;h4 id="官方说明"&gt;官方说明&lt;/h4&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;Why Argo CD? 为什么选择 ArgoCD

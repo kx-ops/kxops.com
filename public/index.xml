@@ -1,79 +1,54 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>kxops</title><link>https://kxops.com/</link><description>Recent content on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 06 May 2026 23:14:04 +0800</lastBuildDate><atom:link href="https://kxops.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Argocd 简述及使用 上</title><link>https://kxops.com/posts/about-argocd/</link><pubDate>Wed, 06 May 2026 23:14:04 +0800</pubDate><guid>https://kxops.com/posts/about-argocd/</guid><description>&lt;p&gt;ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
-&lt;img alt="argocd 架构图" loading="lazy" src="https://cdn.shortpixel.ai/spai/w_1248+q_lossless+ret_img+to_webp/www.apptio.com/wp-content/uploads/argocd-arch.png"&gt;&lt;/p&gt;
-&lt;h4 id="官方说明"&gt;官方说明&lt;/h4&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;Why Argo CD? 为什么选择 ArgoCD
-1. Application definitions, configurations, and environments should be declarative and version controlled.
-让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。
-2. Application deployment and lifecycle management should be automated, auditable, and easy to understand.
-定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。&lt;/p&gt;
-&lt;p&gt;下面简单介绍下 Argo CD 中的几个主要组件：&lt;/p&gt;
-&lt;p&gt;一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;应用程序管理和状态报告&lt;/li&gt;
-&lt;li&gt;执行应用程序操作（例如同步、回滚、用户定义的操作）&lt;/li&gt;
-&lt;li&gt;存储仓库和集群凭据管理（存储为 K8S Secrets 对象）&lt;/li&gt;
-&lt;li&gt;认证和授权给外部身份提供者&lt;/li&gt;
-&lt;li&gt;RBAC&lt;/li&gt;
-&lt;li&gt;Git webhook 事件的侦听器/转发器&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：&lt;/p&gt;</description></item><item><title>GitOps 基本知识入门笔记</title><link>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</link><pubDate>Sat, 02 May 2026 09:51:53 +0800</pubDate><guid>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</guid><description>&lt;p&gt;&lt;img alt="GitOps" loading="lazy" src="https://learn.microsoft.com/ko-kr/azure/architecture/example-scenario/gitops-aks/media/gitops-ci-cd-argo-cd.png" title="GitOps流程示意图"&gt;
-GitOps 是一种基于 Git 仓库来管理 Kubernetes 集群和应用程序交付的现代化 DevOps 实践。核心是将 Git 作为基础设施和应用配置的“唯一源”，通过声明式（YAML）描述期望状态，利用 Git 的版本控制特性实现自动化拉取（Pull）和持续部署。主流工具为 Argo CD 和 Flux。&lt;/p&gt;
-&lt;h3 id="gitops-的核心原则声明式"&gt;GitOps 的核心原则声明式：&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;通过 YAML 定义系统状态（如 Kubernetes 资源）&lt;/li&gt;
-&lt;li&gt;版本控制与不变性：所有状态变更记录于 Git，支持版本追踪&lt;/li&gt;
-&lt;li&gt;自动拉取：工具（如Argo CD）自动同步 Git 中的变更到集群&lt;/li&gt;
-&lt;li&gt;持续一致：实时监控实际状态与 Git 中期望状态是否一致&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="gitops-工作流"&gt;GitOps 工作流&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;提交 开发者将应用配置或 Kubernetes YAML 提交到 Git 存储库&lt;/li&gt;
-&lt;li&gt;触发 GitOps 控制器检测到 Git 仓库中的代码/配置更新&lt;/li&gt;
-&lt;li&gt;同步 控制器（如 Argo CD）将最新配置拉取到 Kubernetes 集群&lt;/li&gt;
-&lt;li&gt;协调 集群的实际状态与 Git 的期望状态自动对齐，不一致则自动修复&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="gitops-的优势"&gt;GitOps 的优势&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;高可观测性与合规性：Git 提交记录即为审计日志&lt;/li&gt;
-&lt;li&gt;回滚方便：出现问题时，使用 git revert 即可瞬间回滚到上一个稳定状态&lt;/li&gt;
-&lt;li&gt;安全性高：无需将 Kubernetes 集群凭证暴露给 CI/CD 系统&lt;/li&gt;
-&lt;li&gt;一致性：确保 Git 记录即生产环境状态&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="gitops-历史"&gt;GitOps 历史&lt;/h3&gt;
-&lt;p&gt;Git 是用于软件开发的关键任务工具，支持拉取请求和代码审查工作流程。拉取请求可提高代码库传入变更的可见性，并鼓励针对变更进行沟通、讨论和审查。&lt;/p&gt;</description></item><item><title>k8s使用 Letsencrypt 和 Traefik 实现 https 自动部署</title><link>https://kxops.com/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</link><pubDate>Fri, 01 May 2026 16:50:13 +0800</pubDate><guid>https://kxops.com/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</guid><description>&lt;p&gt;k3s 使用 Letsencrypt 和 Traefik 完成 https 入口部署&lt;/p&gt;
-&lt;h3 id="内容提要"&gt;内容提要&lt;/h3&gt;
-&lt;p&gt;本文介绍 cert-manager 插件的安装，之后以一个简单的 web 服务部署为例，演示 https 服务的部署过程。&lt;/p&gt;
-&lt;p&gt;安装 cert-manager&lt;/p&gt;
-&lt;p&gt;首先创建 cert-manager 所需的命名空间&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl create namespace cert-manager
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.20.2/cert-manager.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果没有报错，稍等片刻查看 cert-manager 运行正常，就可以继续下一步了：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; kubectl get pods --namespace cert-manager
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;NAME READY STATUS RESTARTS AGE
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cert-manager-6575b47cb5-fcbt5 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 32s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cert-manager-cainjector-b6555495-wrvlx 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 32s
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cert-manager-webhook-787d9fc46-v248j 1/1 Running &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; 32s
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;部署 Issuing Certificates#&lt;/p&gt;
-&lt;p&gt;下面给出一个示例的 letsencrypt.yml 配置，替换其中的邮箱 即可快速查看配置。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;apiVersion&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;cert-manager.io/v1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;kind&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;ClusterIssuer&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;metadata&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;letsencrypt-prod&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;spec&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;acme&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;email&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;git@kxops.com &lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;privateKeySecretRef&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;prod-issuer-account-key&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;server&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;https://acme-v02.api.letsencrypt.org/directory&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;solvers&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#f92672"&gt;http01&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;ingress&lt;/span&gt;:
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;class&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;traefik&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;selector&lt;/span&gt;: {}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;部署，并查看部署描述：&lt;/p&gt;</description></item><item><title>About</title><link>https://kxops.com/about/</link><pubDate>Sun, 26 Apr 2026 13:27:47 +0800</pubDate><guid>https://kxops.com/about/</guid><description>&lt;h2 id="专注于运维自动化"&gt;专注于运维自动化&lt;/h2&gt;
-&lt;h3 id="k8s-ci-cd-gitops--相关技术"&gt;K8s CI CD GitOPS 相关技术&lt;/h3&gt;
-&lt;h1&gt;&lt;/h1&gt;
-&lt;p&gt;我是 Leif &amp;hellip;. 大龄运维工程师&lt;/p&gt;</description></item><item><title>Hello World</title><link>https://kxops.com/posts/hello-world/</link><pubDate>Sun, 26 Apr 2026 13:25:22 +0800</pubDate><guid>https://kxops.com/posts/hello-world/</guid><description>&lt;h5&gt;&lt;/h5&gt;
-&lt;p&gt;Hello World &amp;hellip;
-你好 世界 ！！！！！&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kxops</title>
+    <link>https://kxops.com/</link>
+    <description>Recent content on kxops</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 06 May 2026 23:14:04 +0800</lastBuildDate>
+    <atom:link href="https://kxops.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Argocd 简述及使用 上</title>
+      <link>https://kxops.com/posts/about-argocd/</link>
+      <pubDate>Wed, 06 May 2026 23:14:04 +0800</pubDate>
+      <guid>https://kxops.com/posts/about-argocd/</guid>
+      <description>&lt;p&gt;ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。&#xA;&lt;img src=&#34;https://cdn.shortpixel.ai/spai/w_1248+q_lossless+ret_img+to_webp/www.apptio.com/wp-content/uploads/argocd-arch.png&#34; alt=&#34;argocd 架构图&#34;&gt;&lt;/p&gt;&#xA;&lt;h4 id=&#34;官方说明&#34;&gt;官方说明&lt;/h4&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Why Argo CD? 为什么选择 ArgoCD &#xA;1. Application definitions, configurations, and environments should be declarative and version controlled.&#xA;让构建的应用程序的定义、配置及环境应具备声明式特性，并使代码版本进行控制。&#xA;2. Application deployment and lifecycle management should be automated, auditable, and easy to understand.&#xA;定议应用程序的部署与生命周期管理应实现自动化、可审计，且易于理解。&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Argo CD 可在指定的目标环境中自动部署所需的应用程序状态，应用程序部署可以在 Git 提交时跟踪对分支、标签的更新，或固定到清单的指定版本。&lt;/p&gt;&#xA;&lt;p&gt;下面简单介绍下 Argo CD 中的几个主要组件：&lt;/p&gt;&#xA;&lt;p&gt;一. API 服务：API 服务是一个 gRPC/REST 服务，它暴露了 Web UI、CLI 和 CI/CD 系统使用的接口，主要有以下几个功能：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;应用程序管理和状态报告&lt;/li&gt;&#xA;&lt;li&gt;执行应用程序操作（例如同步、回滚、用户定义的操作）&lt;/li&gt;&#xA;&lt;li&gt;存储仓库和集群凭据管理（存储为 K8S Secrets 对象）&lt;/li&gt;&#xA;&lt;li&gt;认证和授权给外部身份提供者&lt;/li&gt;&#xA;&lt;li&gt;RBAC&lt;/li&gt;&#xA;&lt;li&gt;Git webhook 事件的侦听器/转发器&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;二.  仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GitOps 基本知识入门笔记</title>
+      <link>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Sat, 02 May 2026 09:51:53 +0800</pubDate>
+      <guid>https://kxops.com/posts/gitops%E5%9F%BA%E7%A1%80/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://learn.microsoft.com/ko-kr/azure/architecture/example-scenario/gitops-aks/media/gitops-ci-cd-argo-cd.png&#34; alt=&#34;GitOps&#34; title=&#34;GitOps流程示意图&#34;&gt;&#xA;GitOps 是一种基于 Git 仓库来管理 Kubernetes 集群和应用程序交付的现代化 DevOps 实践。核心是将 Git 作为基础设施和应用配置的“唯一源”，通过声明式（YAML）描述期望状态，利用 Git 的版本控制特性实现自动化拉取（Pull）和持续部署。主流工具为 Argo CD 和 Flux。&lt;/p&gt;&#xA;&lt;h3 id=&#34;gitops-的核心原则声明式&#34;&gt;GitOps 的核心原则声明式：&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;通过 YAML 定义系统状态（如 Kubernetes 资源）&lt;/li&gt;&#xA;&lt;li&gt;版本控制与不变性：所有状态变更记录于 Git，支持版本追踪&lt;/li&gt;&#xA;&lt;li&gt;自动拉取：工具（如Argo CD）自动同步 Git 中的变更到集群&lt;/li&gt;&#xA;&lt;li&gt;持续一致：实时监控实际状态与 Git 中期望状态是否一致&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;gitops-工作流&#34;&gt;GitOps 工作流&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;提交 开发者将应用配置或 Kubernetes YAML 提交到 Git 存储库&lt;/li&gt;&#xA;&lt;li&gt;触发 GitOps 控制器检测到 Git 仓库中的代码/配置更新&lt;/li&gt;&#xA;&lt;li&gt;同步 控制器（如 Argo CD）将最新配置拉取到 Kubernetes 集群&lt;/li&gt;&#xA;&lt;li&gt;协调 集群的实际状态与 Git 的期望状态自动对齐，不一致则自动修复&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;gitops-的优势&#34;&gt;GitOps 的优势&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;高可观测性与合规性：Git 提交记录即为审计日志&lt;/li&gt;&#xA;&lt;li&gt;回滚方便：出现问题时，使用 git revert 即可瞬间回滚到上一个稳定状态&lt;/li&gt;&#xA;&lt;li&gt;安全性高：无需将 Kubernetes 集群凭证暴露给 CI/CD 系统&lt;/li&gt;&#xA;&lt;li&gt;一致性：确保 Git 记录即生产环境状态&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h3 id=&#34;gitops-历史&#34;&gt;GitOps 历史&lt;/h3&gt;&#xA;&lt;p&gt;Git 是用于软件开发的关键任务工具，支持拉取请求和代码审查工作流程。拉取请求可提高代码库传入变更的可见性，并鼓励针对变更进行沟通、讨论和审查。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>k8s使用 Letsencrypt 和 Traefik 实现 https 自动部署</title>
+      <link>https://kxops.com/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Fri, 01 May 2026 16:50:13 +0800</pubDate>
+      <guid>https://kxops.com/posts/k3s-%E4%BD%BF%E7%94%A8-letsencrypt%E5%92%8Ctraefik%E5%AE%8C%E6%88%90https%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</guid>
+      <description>&lt;p&gt;k3s 使用 Letsencrypt 和 Traefik 完成 https 入口部署&lt;/p&gt;&#xA;&lt;h3 id=&#34;内容提要&#34;&gt;内容提要&lt;/h3&gt;&#xA;&lt;p&gt;本文介绍 cert-manager 插件的安装，之后以一个简单的 web 服务部署为例，演示 https 服务的部署过程。&lt;/p&gt;&#xA;&lt;p&gt;安装 cert-manager&lt;/p&gt;&#xA;&lt;p&gt;首先创建 cert-manager 所需的命名空间&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create namespace cert-manager  &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.20.2/cert-manager.yaml&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果没有报错，稍等片刻查看 cert-manager 运行正常，就可以继续下一步了：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; kubectl get pods --namespace cert-manager&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NAME                                     READY   STATUS    RESTARTS   AGE&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-manager-6575b47cb5-fcbt5            1/1     Running   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;          32s&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-manager-cainjector-b6555495-wrvlx   1/1     Running   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;          32s&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cert-manager-webhook-787d9fc46-v248j     1/1     Running   &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;          32s&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;部署 Issuing Certificates#&lt;/p&gt;&#xA;&lt;p&gt;下面给出一个示例的 letsencrypt.yml 配置，替换其中的邮箱 即可快速查看配置。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;apiVersion&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;cert-manager.io/v1&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;kind&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;ClusterIssuer&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;metadata&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;letsencrypt-prod&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;spec&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;acme&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;email&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;git@kxops.com &lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;privateKeySecretRef&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;prod-issuer-account-key&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;server&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;https://acme-v02.api.letsencrypt.org/directory&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;solvers&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#f92672&#34;&gt;http01&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          &lt;span style=&#34;color:#f92672&#34;&gt;ingress&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;class&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;traefik&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;selector&lt;/span&gt;: {}&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;部署，并查看部署描述：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>https://kxops.com/about/</link>
+      <pubDate>Sun, 26 Apr 2026 13:27:47 +0800</pubDate>
+      <guid>https://kxops.com/about/</guid>
+      <description>&lt;h2 id=&#34;专注于运维自动化&#34;&gt;专注于运维自动化&lt;/h2&gt;&#xA;&lt;h3 id=&#34;k8s-ci-cd-gitops--相关技术&#34;&gt;K8s CI CD GitOPS  相关技术&lt;/h3&gt;&#xA;&lt;h1&gt;&lt;/h1&gt;&#xA;&lt;p&gt;我是 Leif &amp;hellip;.  Welcome &amp;hellip;..&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hello World</title>
+      <link>https://kxops.com/posts/hello-world/</link>
+      <pubDate>Sun, 26 Apr 2026 13:25:22 +0800</pubDate>
+      <guid>https://kxops.com/posts/hello-world/</guid>
+      <description>&lt;h5&gt;&lt;/h5&gt;&#xA;&lt;p&gt;Hello World  &amp;hellip;&#xA;你好 世界 ！！！！！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>归档</title>
+      <link>https://kxops.com/archives/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://kxops.com/archives/</guid>
+      <description>所有文章归档</description>
+    </item>
+  </channel>
+</rss>

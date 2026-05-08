@@ -2,11 +2,12 @@
 <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
 <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://kxops.com/ title=首页><span>首页</span></a></li><li><a href=https://kxops.com/archives/ title=归档><span>归档</span></a></li><li><a href=https://kxops.com/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><header class=page-header><h1>Posts</h1></header><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>ArgoCD 简述及使用 下 —— 连接 GitHub、创建 App、版本回滚</h2></header><div class=entry-content><p>上一篇 《Argocd 简述及使用 上》 介绍了 ArgoCD 的架构、核心概念和安装方法。本篇承接上文,讲三件最常用的事:
 连接 GitHub 仓库(含私有仓库) 基于仓库里的 manifest 目录创建 Application 版本回滚 Rollback 一、准备工作 假设你已按上一篇完成了 ArgoCD 安装。先确认服务在线:
-kubectl get pods -n argocd 1. 暴露 ArgoCD Server 本地测试最简单的方式是端口转发:
+kubectl get pods -n argocd 暴露 ArgoCD Server
+本地测试最简单的方式是端口转发:
 kubectl port-forward svc/argocd-server -n argocd 8080:443 浏览器打开 https://localhost:8080 即可访问 UI。
-2. 获取初始密码 ArgoCD 默认用户名为 admin,初始密码存在 Secret 里:
-kubectl -n argocd get secret argocd-initial-admin-secret \ -o jsonpath="{.data.password}" | base64 -d 3. 安装 argocd CLI(可选) 很多操作 CLI 比 UI 更快:
-# Linux curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 sudo install -m 555 argocd /usr/local/bin/argocd # macOS brew install argocd 登录:
+二、连接 GitHub 仓库 ArgoCD 支持两种仓库连接方式:公开仓库(无需凭证)和私有仓库(需 SSH 或 HTTPS 凭证)。
+方式 1:公开仓库(最简单) UI 操作:
+左侧菜单 Settings → Repositories 点击 + CONNECT REPO 选择 VIA HTTPS 填写: Type:git Repository URL:https://github.com/你的用户名/你的仓库.git 点击 CONNECT,状态变为 Successful 即完成 CLI 方式:
 ...</p></div><footer class=entry-footer><span title='2026-05-08 10:00:00 +0800 CST'>May 8, 2026</span></footer><a class=entry-link aria-label="post link to ArgoCD 简述及使用 下 —— 连接 GitHub、创建 App、版本回滚" href=https://kxops.com/posts/argocd-basic-usage/></a></article><article class=post-entry><header class=entry-header><h2 class=entry-hint-parent>Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers</h2></header><div class=entry-content><p>一、本站 kxops.com 运行架构 环节 所用服务 建站系统 Hugo 编辑工具 VS Code 网站托管 GitHub 网站运行 Cloudflare Workers 除域名外,全部 免费。由全球最具生产力的软件协作平台 GitHub 与全球最大的网络服务商 Cloudflare(人称"赛博活佛")提供加速动力。
 费用提示 Cloudflare 开通 Workers 和 Pages 需要绑定银联卡,仅用于身份验证,不产生任何费用。免费版每日可承接 10 万次请求,详见 Cloudflare 开发者平台方案。
 GitHub 只需要注册账号即可使用。

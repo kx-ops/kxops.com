@@ -1,105 +1,107 @@
-<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>hugo 静态站搭建于Github 运行Cloudflare Workers | kxops</title><meta name=keywords content><meta name=description content="本站 kxops.com 运行方式
+<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers | kxops</title><meta name=keywords content><meta name=description content='一、本站 kxops.com 运行架构
 
-建站系统:  Hugo
-网站存放:  Github
-网站运行:  Cloudflare Workers
+  
+      
+          环节
+          所用服务
+      
+  
+  
+      
+          建站系统
+          Hugo
+      
+      
+          编辑工具
+          VS Code
+      
+      
+          网站托管
+          GitHub
+      
+      
+          网站运行
+          Cloudflare Workers
+      
+  
 
-使用vscode 作为markdown 编写器
-除了域名外 全部免费 由全球最具生产力软件开发协作平台 Github.com 及 全球最大的网络服务商 Cloudflare.com (人称赛博活佛) 提供加速动力。
-Cloudflare.com 开通Workers 和 Pages 需要绑银联卡 只需要验证 无费用产生 每日可有10万次点击 免费版详细说明 https://www.cloudflare.com/zh-cn/plans/developer-platform/
-Github 只需要注册即可
-安装部署流程如下
+除域名外,全部 免费。由全球最具生产力的软件协作平台 GitHub 与全球最大的网络服务商 Cloudflare(人称"赛博活佛")提供加速动力。
+
+费用提示
+Cloudflare 开通 Workers 和 Pages 需要绑定银联卡,仅用于身份验证,不产生任何费用。免费版每日可承接 10 万次请求,详见 Cloudflare 开发者平台方案。
+GitHub 只需要注册账号即可使用。
 
 
+二、部署流程总览
+整个发布链路分三步:
 
-本地电脑安装 hugo 部署文档
-产生的文档生成后 通过git push public变动推送到 github.com
-cloudflare监控 github.com/kx-ops/kxops.com 变动更新网站
+本地生成 — 在本地电脑用 Hugo 构建静态文档
+推送仓库 — 通过 git push 将 public/ 目录推送到 GitHub
+自动部署 — Cloudflare 监听 github.com/kx-ops/kxops.com 的变动,自动更新网站
 
-本地电脑安装 hugo 及使用过程
-安装最新Windows版 hugo 下载地址
-https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip
-安装windows 版 git
-https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe
-打开环境变量设置
-点击 Windows 开始菜单，直接输入 “环境变量”。
-选择 “编辑系统环境变量”
-在弹出的窗口中，点击右下角的 “环境变量” 按钮。
-第三步：修改 Path 变量
-在“系统变量” 栏中，找到名为 Path 的变量，双击它。
-在弹出的窗口右侧点击 “新建”。
-将你第一步复制的d:\Hugo 文件夹路径 粘贴进去。
-依次点击 “确定” 保存所有窗口。"><meta name=author content><link rel=canonical href=https://kxops.com/posts/hugo-on-github-cloudflare/><link crossorigin=anonymous href=/assets/css/stylesheet.css rel="preload stylesheet" as=style><link rel=icon href=https://kxops.com/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://kxops.com/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://kxops.com/favicon-32x32.png><link rel=apple-touch-icon href=https://kxops.com/apple-touch-icon.png><link rel=mask-icon href=https://kxops.com/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://kxops.com/posts/hugo-on-github-cloudflare/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://kxops.com/posts/hugo-on-github-cloudflare/"><meta property="og:site_name" content="kxops"><meta property="og:title" content="hugo 静态站搭建于Github 运行Cloudflare Workers "><meta property="og:description" content="本站 kxops.com 运行方式 建站系统: Hugo 网站存放: Github 网站运行: Cloudflare Workers 使用vscode 作为markdown 编写器 除了域名外 全部免费 由全球最具生产力软件开发协作平台 Github.com 及 全球最大的网络服务商 Cloudflare.com (人称赛博活佛) 提供加速动力。
-Cloudflare.com 开通Workers 和 Pages 需要绑银联卡 只需要验证 无费用产生 每日可有10万次点击 免费版详细说明 https://www.cloudflare.com/zh-cn/plans/developer-platform/
-Github 只需要注册即可
-安装部署流程如下
-本地电脑安装 hugo 部署文档 产生的文档生成后 通过git push public变动推送到 github.com cloudflare监控 github.com/kx-ops/kxops.com 变动更新网站 本地电脑安装 hugo 及使用过程 安装最新Windows版 hugo 下载地址 https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip
-安装windows 版 git https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe
-打开环境变量设置 点击 Windows 开始菜单，直接输入 “环境变量”。 选择 “编辑系统环境变量”
-在弹出的窗口中，点击右下角的 “环境变量” 按钮。 第三步：修改 Path 变量 在“系统变量” 栏中，找到名为 Path 的变量，双击它。 在弹出的窗口右侧点击 “新建”。 将你第一步复制的d:\Hugo 文件夹路径 粘贴进去。 依次点击 “确定” 保存所有窗口。"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-05-07T21:12:42+08:00"><meta property="article:modified_time" content="2026-05-07T21:12:42+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="hugo 静态站搭建于Github 运行Cloudflare Workers "><meta name=twitter:description content="本站 kxops.com 运行方式 建站系统: Hugo 网站存放: Github 网站运行: Cloudflare Workers 使用vscode 作为markdown 编写器 除了域名外 全部免费 由全球最具生产力软件开发协作平台 Github.com 及 全球最大的网络服务商 Cloudflare.com (人称赛博活佛) 提供加速动力。
-Cloudflare.com 开通Workers 和 Pages 需要绑银联卡 只需要验证 无费用产生 每日可有10万次点击 免费版详细说明 https://www.cloudflare.com/zh-cn/plans/developer-platform/
-Github 只需要注册即可
-安装部署流程如下
-本地电脑安装 hugo 部署文档 产生的文档生成后 通过git push public变动推送到 github.com cloudflare监控 github.com/kx-ops/kxops.com 变动更新网站 本地电脑安装 hugo 及使用过程 安装最新Windows版 hugo 下载地址 https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip
-安装windows 版 git https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe
-打开环境变量设置 点击 Windows 开始菜单，直接输入 “环境变量”。 选择 “编辑系统环境变量”
-在弹出的窗口中，点击右下角的 “环境变量” 按钮。 第三步：修改 Path 变量 在“系统变量” 栏中，找到名为 Path 的变量，双击它。 在弹出的窗口右侧点击 “新建”。 将你第一步复制的d:\Hugo 文件夹路径 粘贴进去。 依次点击 “确定” 保存所有窗口。"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://kxops.com/posts/"},{"@type":"ListItem","position":2,"name":"hugo 静态站搭建于Github 运行Cloudflare Workers ","item":"https://kxops.com/posts/hugo-on-github-cloudflare/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"hugo 静态站搭建于Github 运行Cloudflare Workers ","name":"hugo 静态站搭建于Github 运行Cloudflare Workers ","description":"本站 kxops.com 运行方式 建站系统: Hugo 网站存放: Github 网站运行: Cloudflare Workers 使用vscode 作为markdown 编写器 除了域名外 全部免费 由全球最具生产力软件开发协作平台 Github.com 及 全球最大的网络服务商 Cloudflare.com (人称赛博活佛) 提供加速动力。\nCloudflare.com 开通Workers 和 Pages 需要绑银联卡 只需要验证 无费用产生 每日可有10万次点击 免费版详细说明 https://www.cloudflare.com/zh-cn/plans/developer-platform/\nGithub 只需要注册即可\n安装部署流程如下\n本地电脑安装 hugo 部署文档 产生的文档生成后 通过git push public变动推送到 github.com cloudflare监控 github.com/kx-ops/kxops.com 变动更新网站 本地电脑安装 hugo 及使用过程 安装最新Windows版 hugo 下载地址 https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip\n安装windows 版 git https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe\n打开环境变量设置 点击 Windows 开始菜单，直接输入 “环境变量”。 选择 “编辑系统环境变量”\n在弹出的窗口中，点击右下角的 “环境变量” 按钮。 第三步：修改 Path 变量 在“系统变量” 栏中，找到名为 Path 的变量，双击它。 在弹出的窗口右侧点击 “新建”。 将你第一步复制的d:\\Hugo 文件夹路径 粘贴进去。 依次点击 “确定” 保存所有窗口。\n","keywords":[],"articleBody":"本站 kxops.com 运行方式 建站系统: Hugo 网站存放: Github 网站运行: Cloudflare Workers 使用vscode 作为markdown 编写器 除了域名外 全部免费 由全球最具生产力软件开发协作平台 Github.com 及 全球最大的网络服务商 Cloudflare.com (人称赛博活佛) 提供加速动力。\nCloudflare.com 开通Workers 和 Pages 需要绑银联卡 只需要验证 无费用产生 每日可有10万次点击 免费版详细说明 https://www.cloudflare.com/zh-cn/plans/developer-platform/\nGithub 只需要注册即可\n安装部署流程如下\n本地电脑安装 hugo 部署文档 产生的文档生成后 通过git push public变动推送到 github.com cloudflare监控 github.com/kx-ops/kxops.com 变动更新网站 本地电脑安装 hugo 及使用过程 安装最新Windows版 hugo 下载地址 https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip\n安装windows 版 git https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe\n打开环境变量设置 点击 Windows 开始菜单，直接输入 “环境变量”。 选择 “编辑系统环境变量”\n在弹出的窗口中，点击右下角的 “环境变量” 按钮。 第三步：修改 Path 变量 在“系统变量” 栏中，找到名为 Path 的变量，双击它。 在弹出的窗口右侧点击 “新建”。 将你第一步复制的d:\\Hugo 文件夹路径 粘贴进去。 依次点击 “确定” 保存所有窗口。\n在命令提示输入\ncd /d D:\\hugo\\kxops.com hugo new site kxops.com cd kxops.com hugo new posts/hello-world.md ##这儿就可以创建第一个文档helloworld了 用vscode 打开 d:\\hugo\\kxops.com\\posts\\hello-world.md 编写即可\ngithub 相应操作 在Windows 下 生成自已的ssh-key 在命令提示符\nssh-keygen -C \"git@kxops.com\" 按回车确认即可生成 你的密钥已生成在\nC:\\Users\\你的用户名\\.ssh\\ 目录下 cat ~/.ssh/id_ed25519.pub 复制文本内容 将公钥添加到 GitHub 登录 GitHub，点击右上角头像 -\u003e Settings。 在左侧菜单栏找到 SSH and GPG keys。 点击右上角的 New SSH key。 Title: 随便起个名字（例如 “Win11-PC”）。 Key: 将刚才复制的内容粘贴进去。 点击 Add SSH key，完成即可 实现ssh 登入\n创建github 仓库 如git@github.com:kx-ops/kxops.com.git 设置公开或私有都可以\n初始化hugo目录并使用 在命令提示符\ncd /d D:\\hugo\\kxops.com echo \"# kxops.com\" \u003e\u003e README.md git init git add README.md git commit -m \"first commit\" git branch -M main git remote add origin git@github.com:kx-ops/kxops.com.git 做完这些 我们用vscode 在d:\\hugo\\kxops.com 创建一个.gitignore 内容如下\nvscode/ .idea/ .DS_Store .run/ archetypes/ resources/ themes/ content/ .hugo_build.lock hugo.toml 这个文件的意义 是我们只上传hugo生成的静态页面文件夹到 github.com 其它的文件都忽略\nCloudflare 部署设置 登陆cloudflare 在 Cloudflare 控制台选择 Worker和 Pages -\u003e 创建应用程序 点击 Continue with Github 。\n授权 GitHub 账号并选择仓库即可。\n每次更新的流程是\ncd /d D:\\hugo\\kxops.com hugo new posts/我的文章.md 然后使用vscode或者自已喜欢的markdown编辑器 编写D:\\hugo\\kxops.com\\posts\\我的文章.md 保存即可 更新到github 使用如下指令\ncd /d D:\\hugo\\kxops.com rd /s /q public resources .hugo_build.lock hugo --minify --gc --cleanDestinationDir --baseURL \"https://kxops.com/\" git add . git commit -m \"更新\" git push origin main 至此 全文完…\n","wordCount":"252","inLanguage":"en","datePublished":"2026-05-07T21:12:42+08:00","dateModified":"2026-05-07T21:12:42+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kxops.com/posts/hugo-on-github-cloudflare/"},"publisher":{"@type":"Organization","name":"kxops","logo":{"@type":"ImageObject","url":"https://kxops.com/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://kxops.com/ accesskey=h title="kxops (Alt + H)">kxops</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+[本地 Hugo] ──git push──▶ [GitHub 仓库] ──webhook──▶ [Cloudflare Workers]
+
+三、本地电脑安装 Hugo
+1. 下载安装包
+
+Hugo(Windows):hugo_0.161.1_windows-amd64.zip
+Git(Windows):Git-2.54.0-64-bit.exe
+
+2. 配置 Hugo 环境变量
+
+点击 Windows 开始菜单,输入 &ldquo;环境变量&rdquo;
+选择 &ldquo;编辑系统环境变量&rdquo;
+在弹出窗口中,点击右下角 &ldquo;环境变量&rdquo; 按钮
+在"系统变量"栏中,找到 Path 变量并双击
+在右侧点击 &ldquo;新建&rdquo;,粘贴 Hugo 所在目录,例如 D:\Hugo
+依次点击 &ldquo;确定&rdquo; 保存全部窗口
+
+3. 创建第一个站点
+打开命令提示符,依次执行:'><meta name=author content><link rel=canonical href=https://kxops.com/posts/hugo-on-github-cloudflare/><link crossorigin=anonymous href=/assets/css/stylesheet.css rel="preload stylesheet" as=style><link rel=icon href=https://kxops.com/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://kxops.com/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://kxops.com/favicon-32x32.png><link rel=apple-touch-icon href=https://kxops.com/apple-touch-icon.png><link rel=mask-icon href=https://kxops.com/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://kxops.com/posts/hugo-on-github-cloudflare/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><meta property="og:url" content="https://kxops.com/posts/hugo-on-github-cloudflare/"><meta property="og:site_name" content="kxops"><meta property="og:title" content="Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers"><meta property="og:description" content='一、本站 kxops.com 运行架构 环节 所用服务 建站系统 Hugo 编辑工具 VS Code 网站托管 GitHub 网站运行 Cloudflare Workers 除域名外,全部 免费。由全球最具生产力的软件协作平台 GitHub 与全球最大的网络服务商 Cloudflare(人称"赛博活佛")提供加速动力。
+费用提示 Cloudflare 开通 Workers 和 Pages 需要绑定银联卡,仅用于身份验证,不产生任何费用。免费版每日可承接 10 万次请求,详见 Cloudflare 开发者平台方案。
+GitHub 只需要注册账号即可使用。
+二、部署流程总览 整个发布链路分三步:
+本地生成 — 在本地电脑用 Hugo 构建静态文档 推送仓库 — 通过 git push 将 public/ 目录推送到 GitHub 自动部署 — Cloudflare 监听 github.com/kx-ops/kxops.com 的变动,自动更新网站 [本地 Hugo] ──git push──▶ [GitHub 仓库] ──webhook──▶ [Cloudflare Workers] 三、本地电脑安装 Hugo 1. 下载安装包 Hugo(Windows):hugo_0.161.1_windows-amd64.zip Git(Windows):Git-2.54.0-64-bit.exe 2. 配置 Hugo 环境变量 点击 Windows 开始菜单,输入 “环境变量” 选择 “编辑系统环境变量” 在弹出窗口中,点击右下角 “环境变量” 按钮 在"系统变量"栏中,找到 Path 变量并双击 在右侧点击 “新建”,粘贴 Hugo 所在目录,例如 D:\Hugo 依次点击 “确定” 保存全部窗口 3. 创建第一个站点 打开命令提示符,依次执行:'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-05-07T21:12:42+08:00"><meta property="article:modified_time" content="2026-05-07T21:12:42+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers"><meta name=twitter:description content='一、本站 kxops.com 运行架构 环节 所用服务 建站系统 Hugo 编辑工具 VS Code 网站托管 GitHub 网站运行 Cloudflare Workers 除域名外,全部 免费。由全球最具生产力的软件协作平台 GitHub 与全球最大的网络服务商 Cloudflare(人称"赛博活佛")提供加速动力。
+费用提示 Cloudflare 开通 Workers 和 Pages 需要绑定银联卡,仅用于身份验证,不产生任何费用。免费版每日可承接 10 万次请求,详见 Cloudflare 开发者平台方案。
+GitHub 只需要注册账号即可使用。
+二、部署流程总览 整个发布链路分三步:
+本地生成 — 在本地电脑用 Hugo 构建静态文档 推送仓库 — 通过 git push 将 public/ 目录推送到 GitHub 自动部署 — Cloudflare 监听 github.com/kx-ops/kxops.com 的变动,自动更新网站 [本地 Hugo] ──git push──▶ [GitHub 仓库] ──webhook──▶ [Cloudflare Workers] 三、本地电脑安装 Hugo 1. 下载安装包 Hugo(Windows):hugo_0.161.1_windows-amd64.zip Git(Windows):Git-2.54.0-64-bit.exe 2. 配置 Hugo 环境变量 点击 Windows 开始菜单,输入 “环境变量” 选择 “编辑系统环境变量” 在弹出窗口中,点击右下角 “环境变量” 按钮 在"系统变量"栏中,找到 Path 变量并双击 在右侧点击 “新建”,粘贴 Hugo 所在目录,例如 D:\Hugo 依次点击 “确定” 保存全部窗口 3. 创建第一个站点 打开命令提示符,依次执行:'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://kxops.com/posts/"},{"@type":"ListItem","position":2,"name":"Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers","item":"https://kxops.com/posts/hugo-on-github-cloudflare/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers","name":"Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers","description":"一、本站 kxops.com 运行架构 环节 所用服务 建站系统 Hugo 编辑工具 VS Code 网站托管 GitHub 网站运行 Cloudflare Workers 除域名外,全部 免费。由全球最具生产力的软件协作平台 GitHub 与全球最大的网络服务商 Cloudflare(人称\u0026quot;赛博活佛\u0026quot;)提供加速动力。\n费用提示 Cloudflare 开通 Workers 和 Pages 需要绑定银联卡,仅用于身份验证,不产生任何费用。免费版每日可承接 10 万次请求,详见 Cloudflare 开发者平台方案。\nGitHub 只需要注册账号即可使用。\n二、部署流程总览 整个发布链路分三步:\n本地生成 — 在本地电脑用 Hugo 构建静态文档 推送仓库 — 通过 git push 将 public/ 目录推送到 GitHub 自动部署 — Cloudflare 监听 github.com/kx-ops/kxops.com 的变动,自动更新网站 [本地 Hugo] ──git push──▶ [GitHub 仓库] ──webhook──▶ [Cloudflare Workers] 三、本地电脑安装 Hugo 1. 下载安装包 Hugo(Windows):hugo_0.161.1_windows-amd64.zip Git(Windows):Git-2.54.0-64-bit.exe 2. 配置 Hugo 环境变量 点击 Windows 开始菜单,输入 \u0026ldquo;环境变量\u0026rdquo; 选择 \u0026ldquo;编辑系统环境变量\u0026rdquo; 在弹出窗口中,点击右下角 \u0026ldquo;环境变量\u0026rdquo; 按钮 在\u0026quot;系统变量\u0026quot;栏中,找到 Path 变量并双击 在右侧点击 \u0026ldquo;新建\u0026rdquo;,粘贴 Hugo 所在目录,例如 D:\\Hugo 依次点击 \u0026ldquo;确定\u0026rdquo; 保存全部窗口 3. 创建第一个站点 打开命令提示符,依次执行:\n","keywords":[],"articleBody":"一、本站 kxops.com 运行架构 环节 所用服务 建站系统 Hugo 编辑工具 VS Code 网站托管 GitHub 网站运行 Cloudflare Workers 除域名外,全部 免费。由全球最具生产力的软件协作平台 GitHub 与全球最大的网络服务商 Cloudflare(人称\"赛博活佛\")提供加速动力。\n费用提示 Cloudflare 开通 Workers 和 Pages 需要绑定银联卡,仅用于身份验证,不产生任何费用。免费版每日可承接 10 万次请求,详见 Cloudflare 开发者平台方案。\nGitHub 只需要注册账号即可使用。\n二、部署流程总览 整个发布链路分三步:\n本地生成 — 在本地电脑用 Hugo 构建静态文档 推送仓库 — 通过 git push 将 public/ 目录推送到 GitHub 自动部署 — Cloudflare 监听 github.com/kx-ops/kxops.com 的变动,自动更新网站 [本地 Hugo] ──git push──▶ [GitHub 仓库] ──webhook──▶ [Cloudflare Workers] 三、本地电脑安装 Hugo 1. 下载安装包 Hugo(Windows):hugo_0.161.1_windows-amd64.zip Git(Windows):Git-2.54.0-64-bit.exe 2. 配置 Hugo 环境变量 点击 Windows 开始菜单,输入 “环境变量” 选择 “编辑系统环境变量” 在弹出窗口中,点击右下角 “环境变量” 按钮 在\"系统变量\"栏中,找到 Path 变量并双击 在右侧点击 “新建”,粘贴 Hugo 所在目录,例如 D:\\Hugo 依次点击 “确定” 保存全部窗口 3. 创建第一个站点 打开命令提示符,依次执行:\ncd /d D:\\hugo\\kxops.com hugo new site kxops.com cd kxops.com hugo new posts/hello-world.md 最后一行会创建你的第一篇文章 hello-world.md。用 VS Code 打开 D:\\hugo\\kxops.com\\posts\\hello-world.md 即可开始编写。\n四、GitHub 相关配置 1. 生成 SSH 密钥 在命令提示符中执行:\nssh-keygen -C \"git@kxops.com\" 一路回车即可,密钥会生成在:\nC:\\Users\\你的用户名\\.ssh\\ 2. 复制公钥内容 cat ~/.ssh/id_ed25519.pub 复制输出的全部文本。\n3. 将公钥添加到 GitHub 登录 GitHub,点击右上角头像 → Settings 左侧菜单找到 SSH and GPG keys 点击右上角 New SSH key 填写信息: Title:随意命名,例如 Win11-PC Key:粘贴刚才复制的公钥内容 点击 Add SSH key 完成,即可实现 SSH 免密登录 4. 创建并初始化仓库 先在 GitHub 创建仓库,例如 git@github.com:kx-ops/kxops.com.git(公开或私有均可)。\n然后在本地初始化:\ncd /d D:\\hugo\\kxops.com echo \"# kxops.com\" \u003e\u003e README.md git init git add README.md git commit -m \"first commit\" git branch -M main git remote add origin git@github.com:kx-ops/kxops.com.git 5. 配置 .gitignore 在 D:\\hugo\\kxops.com 目录下,用 VS Code 新建 .gitignore 文件,内容如下:\n.vscode/ .idea/ .DS_Store .run/ archetypes/ resources/ themes/ content/ .hugo_build.lock hugo.toml 说明:此配置的作用是 只上传 Hugo 生成的静态页面目录到 GitHub,其他源文件全部忽略。\n五、Cloudflare 部署设置 登录 Cloudflare,在控制台选择 Workers 和 Pages → 创建应用程序 点击 Continue with GitHub 授权 GitHub 账号并选择对应仓库即可 部署完成后,Cloudflare 会自动监听仓库变动并发布到全球 CDN 节点。\n六、日常更新流程 1. 新建文章 cd /d D:\\hugo\\kxops.com hugo new posts/我的文章.md 2. 编写内容 用 VS Code 或其他 Markdown 编辑器打开 D:\\hugo\\kxops.com\\posts\\我的文章.md,编辑后保存。\n3. 构建并推送 cd /d D:\\hugo\\kxops.com rd /s /q public resources .hugo_build.lock hugo --minify --gc --cleanDestinationDir --baseURL \"https://kxops.com/\" git add . git commit -m \"更新\" git push origin main 推送完成后,Cloudflare 会自动重新部署,通常几十秒内即可在 kxops.com 看到更新。\n至此,全文完。 🎉\n","wordCount":"292","inLanguage":"en","datePublished":"2026-05-07T21:12:42+08:00","dateModified":"2026-05-07T21:12:42+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kxops.com/posts/hugo-on-github-cloudflare/"},"publisher":{"@type":"Organization","name":"kxops","logo":{"@type":"ImageObject","url":"https://kxops.com/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://kxops.com/ accesskey=h title="kxops (Alt + H)">kxops</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
 <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://kxops.com/ title=首页><span>首页</span></a></li><li><a href=https://kxops.com/archives/ title=归档><span>归档</span></a></li><li><a href=https://kxops.com/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><h1 class="post-title entry-hint-parent">hugo 静态站搭建于Github 运行Cloudflare Workers</h1><div class=post-meta><span title='2026-05-07 21:12:42 +0800 CST'>May 7, 2026</span></div></header><div class="post-content md-content"><h2 id=本站-kxopscom-运行方式>本站 kxops.com 运行方式<a hidden class=anchor aria-hidden=true href=#本站-kxopscom-运行方式>#</a></h2><ul><li><strong>建站系统</strong>: Hugo</li><li><strong>网站存放</strong>: Github</li><li><strong>网站运行</strong>: Cloudflare Workers</li></ul><p>使用vscode 作为markdown 编写器
-除了域名外 全部免费 由全球最具生产力软件开发协作平台 Github.com 及 全球最大的网络服务商 Cloudflare.com (人称赛博活佛) 提供加速动力。</p><p>Cloudflare.com 开通Workers 和 Pages 需要绑银联卡 只需要验证 无费用产生 每日可有10万次点击 免费版详细说明 <a href=https://www.cloudflare.com/zh-cn/plans/developer-platform/>https://www.cloudflare.com/zh-cn/plans/developer-platform/</a></p><p>Github 只需要注册即可</p><p>安装部署流程如下</p><blockquote></blockquote><ol><li>本地电脑安装 hugo 部署文档</li><li>产生的文档生成后 通过git push public变动推送到 github.com</li><li>cloudflare监控 github.com/kx-ops/kxops.com 变动更新网站</li></ol><h3 id=本地电脑安装-hugo-及使用过程>本地电脑安装 hugo 及使用过程<a hidden class=anchor aria-hidden=true href=#本地电脑安装-hugo-及使用过程>#</a></h3><p>安装最新Windows版 hugo 下载地址
-<a href=https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip>https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip</a></p><p>安装windows 版 git
-<a href=https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe>https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe</a></p><p>打开环境变量设置
-点击 Windows 开始菜单，直接输入 “环境变量”。
-选择 “编辑系统环境变量”</p><p>在弹出的窗口中，点击右下角的 “环境变量” 按钮。
-第三步：修改 Path 变量
-在“系统变量” 栏中，找到名为 Path 的变量，双击它。
-在弹出的窗口右侧点击 “新建”。
-将你第一步复制的d:\Hugo 文件夹路径 粘贴进去。
-依次点击 “确定” 保存所有窗口。</p><p>在命令提示输入</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span><span style=color:#66d9ef>cd</span> /d D:\hugo\kxops.com
+<svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://kxops.com/ title=首页><span>首页</span></a></li><li><a href=https://kxops.com/archives/ title=归档><span>归档</span></a></li><li><a href=https://kxops.com/about/ title=关于><span>关于</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><h1 class="post-title entry-hint-parent">Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers</h1><div class=post-meta><span title='2026-05-07 21:12:42 +0800 CST'>May 7, 2026</span></div></header><div class="post-content md-content"><h2 id=一本站-kxopscom-运行架构>一、本站 kxops.com 运行架构<a hidden class=anchor aria-hidden=true href=#一本站-kxopscom-运行架构>#</a></h2><table><thead><tr><th>环节</th><th>所用服务</th></tr></thead><tbody><tr><td><strong>建站系统</strong></td><td><a href=https://gohugo.io/>Hugo</a></td></tr><tr><td><strong>编辑工具</strong></td><td><a href=https://code.visualstudio.com/>VS Code</a></td></tr><tr><td><strong>网站托管</strong></td><td><a href=https://github.com/>GitHub</a></td></tr><tr><td><strong>网站运行</strong></td><td><a href=https://workers.cloudflare.com/>Cloudflare Workers</a></td></tr></tbody></table><p>除域名外,全部 <strong>免费</strong>。由全球最具生产力的软件协作平台 <strong>GitHub</strong> 与全球最大的网络服务商 <strong>Cloudflare</strong>(人称"赛博活佛")提供加速动力。</p><blockquote><p><strong>费用提示</strong>
+Cloudflare 开通 Workers 和 Pages 需要绑定银联卡,<strong>仅用于身份验证,不产生任何费用</strong>。免费版每日可承接 10 万次请求,详见 <a href=https://www.cloudflare.com/zh-cn/plans/developer-platform/>Cloudflare 开发者平台方案</a>。</p><p>GitHub 只需要注册账号即可使用。</p></blockquote><hr><h2 id=二部署流程总览>二、部署流程总览<a hidden class=anchor aria-hidden=true href=#二部署流程总览>#</a></h2><p>整个发布链路分三步:</p><ol><li><strong>本地生成</strong> — 在本地电脑用 Hugo 构建静态文档</li><li><strong>推送仓库</strong> — 通过 <code>git push</code> 将 <code>public/</code> 目录推送到 GitHub</li><li><strong>自动部署</strong> — Cloudflare 监听 <code>github.com/kx-ops/kxops.com</code> 的变动,自动更新网站</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>[本地 Hugo] ──git push──▶ [GitHub 仓库] ──webhook──▶ [Cloudflare Workers]
+</span></span></code></pre></div><hr><h2 id=三本地电脑安装-hugo>三、本地电脑安装 Hugo<a hidden class=anchor aria-hidden=true href=#三本地电脑安装-hugo>#</a></h2><h3 id=1-下载安装包>1. 下载安装包<a hidden class=anchor aria-hidden=true href=#1-下载安装包>#</a></h3><ul><li><strong>Hugo(Windows)</strong>:<a href=https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip>hugo_0.161.1_windows-amd64.zip</a></li><li><strong>Git(Windows)</strong>:<a href=https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe>Git-2.54.0-64-bit.exe</a></li></ul><h3 id=2-配置-hugo-环境变量>2. 配置 Hugo 环境变量<a hidden class=anchor aria-hidden=true href=#2-配置-hugo-环境变量>#</a></h3><ol><li>点击 Windows 开始菜单,输入 <strong>&ldquo;环境变量&rdquo;</strong></li><li>选择 <strong>&ldquo;编辑系统环境变量&rdquo;</strong></li><li>在弹出窗口中,点击右下角 <strong>&ldquo;环境变量&rdquo;</strong> 按钮</li><li>在"系统变量"栏中,找到 <strong>Path</strong> 变量并双击</li><li>在右侧点击 <strong>&ldquo;新建&rdquo;</strong>,粘贴 Hugo 所在目录,例如 <code>D:\Hugo</code></li><li>依次点击 <strong>&ldquo;确定&rdquo;</strong> 保存全部窗口</li></ol><h3 id=3-创建第一个站点>3. 创建第一个站点<a hidden class=anchor aria-hidden=true href=#3-创建第一个站点>#</a></h3><p>打开命令提示符,依次执行:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span><span style=color:#66d9ef>cd</span> /d D:\hugo\kxops.com
 </span></span><span style=display:flex><span>hugo new site kxops.com
 </span></span><span style=display:flex><span><span style=color:#66d9ef>cd</span> kxops.com
-</span></span><span style=display:flex><span>hugo new posts/hello-world.md ##这儿就可以创建第一个文档helloworld了
-</span></span></code></pre></div><p>用vscode 打开 d:\hugo\kxops.com\posts\hello-world.md 编写即可</p><h3 id=github-相应操作>github 相应操作<a hidden class=anchor aria-hidden=true href=#github-相应操作>#</a></h3><p>在Windows 下 生成自已的ssh-key
-在命令提示符</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span>ssh-keygen  -C <span style=color:#e6db74>&#34;git@kxops.com&#34;</span>
-</span></span></code></pre></div><p>按回车确认即可生成
-你的密钥已生成在</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span>C:\Users\你的用户名\.ssh\<span style=color:#75715e> 目录下</span>
-</span></span></code></pre></div><p>cat ~/.ssh/id_ed25519.pub 复制文本内容
-将公钥添加到 GitHub
-登录 GitHub，点击右上角头像 -> Settings。
-在左侧菜单栏找到 SSH and GPG keys。
-点击右上角的 New SSH key。
-Title: 随便起个名字（例如 &ldquo;Win11-PC&rdquo;）。
-Key: 将刚才复制的内容粘贴进去。
-点击 Add SSH key，完成即可 实现ssh 登入</p><p>创建github 仓库 如git@github.com:kx-ops/kxops.com.git 设置公开或私有都可以</p><p>初始化hugo目录并使用
-在命令提示符</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span><span style=color:#66d9ef>cd</span> /d D:\hugo\kxops.com
+</span></span><span style=display:flex><span>hugo new posts/hello-world.md
+</span></span></code></pre></div><p>最后一行会创建你的第一篇文章 <code>hello-world.md</code>。用 VS Code 打开 <code>D:\hugo\kxops.com\posts\hello-world.md</code> 即可开始编写。</p><hr><h2 id=四github-相关配置>四、GitHub 相关配置<a hidden class=anchor aria-hidden=true href=#四github-相关配置>#</a></h2><h3 id=1-生成-ssh-密钥>1. 生成 SSH 密钥<a hidden class=anchor aria-hidden=true href=#1-生成-ssh-密钥>#</a></h3><p>在命令提示符中执行:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span>ssh-keygen -C <span style=color:#e6db74>&#34;git@kxops.com&#34;</span>
+</span></span></code></pre></div><p>一路回车即可,密钥会生成在:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-text data-lang=text><span style=display:flex><span>C:\Users\你的用户名\.ssh\
+</span></span></code></pre></div><h3 id=2-复制公钥内容>2. 复制公钥内容<a hidden class=anchor aria-hidden=true href=#2-复制公钥内容>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>cat ~/.ssh/id_ed25519.pub
+</span></span></code></pre></div><p>复制输出的全部文本。</p><h3 id=3-将公钥添加到-github>3. 将公钥添加到 GitHub<a hidden class=anchor aria-hidden=true href=#3-将公钥添加到-github>#</a></h3><ol><li>登录 GitHub,点击右上角头像 → <strong>Settings</strong></li><li>左侧菜单找到 <strong>SSH and GPG keys</strong></li><li>点击右上角 <strong>New SSH key</strong></li><li>填写信息:<ul><li><strong>Title</strong>:随意命名,例如 <code>Win11-PC</code></li><li><strong>Key</strong>:粘贴刚才复制的公钥内容</li></ul></li><li>点击 <strong>Add SSH key</strong> 完成,即可实现 SSH 免密登录</li></ol><h3 id=4-创建并初始化仓库>4. 创建并初始化仓库<a hidden class=anchor aria-hidden=true href=#4-创建并初始化仓库>#</a></h3><p>先在 GitHub 创建仓库,例如 <code>git@github.com:kx-ops/kxops.com.git</code>(公开或私有均可)。</p><p>然后在本地初始化:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span><span style=color:#66d9ef>cd</span> /d D:\hugo\kxops.com
 </span></span><span style=display:flex><span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;# kxops.com&#34;</span> &gt;&gt; README.md
 </span></span><span style=display:flex><span>git init
 </span></span><span style=display:flex><span>git add README.md
 </span></span><span style=display:flex><span>git commit -m <span style=color:#e6db74>&#34;first commit&#34;</span>
 </span></span><span style=display:flex><span>git branch -M main
 </span></span><span style=display:flex><span>git remote add origin git@github.com:kx-ops/kxops.com.git
-</span></span></code></pre></div><p>做完这些
-我们用vscode 在d:\hugo\kxops.com 创建一个.gitignore 内容如下</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#ae81ff>vscode/</span>
-</span></span><span style=display:flex><span><span style=color:#ae81ff>.idea/</span>
-</span></span><span style=display:flex><span><span style=color:#ae81ff>.DS_Store</span>
-</span></span><span style=display:flex><span><span style=color:#ae81ff>.run/</span>
-</span></span><span style=display:flex><span><span style=color:#ae81ff>archetypes/</span>
-</span></span><span style=display:flex><span><span style=color:#ae81ff>resources/</span>
-</span></span><span style=display:flex><span><span style=color:#ae81ff>themes/</span>
-</span></span><span style=display:flex><span><span style=color:#ae81ff>content/</span>
-</span></span><span style=display:flex><span><span style=color:#ae81ff>.hugo_build.lock</span>
-</span></span><span style=display:flex><span><span style=color:#ae81ff>hugo.toml</span>
-</span></span></code></pre></div><p>这个文件的意义 是我们只上传hugo生成的静态页面文件夹到 github.com 其它的文件都忽略</p><h3 id=cloudflare-部署设置>Cloudflare 部署设置<a hidden class=anchor aria-hidden=true href=#cloudflare-部署设置>#</a></h3><p>登陆cloudflare 在 Cloudflare 控制台选择 Worker和 Pages -> 创建应用程序
-点击 Continue with Github 。</p><p>授权 GitHub 账号并选择仓库即可。</p><p>每次更新的流程是</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span><span style=color:#66d9ef>cd</span> /d D:\hugo\kxops.com
+</span></span></code></pre></div><h3 id=5-配置-gitignore>5. 配置 .gitignore<a hidden class=anchor aria-hidden=true href=#5-配置-gitignore>#</a></h3><p>在 <code>D:\hugo\kxops.com</code> 目录下,用 VS Code 新建 <code>.gitignore</code> 文件,内容如下:</p><pre tabindex=0><code class=language-gitignore data-lang=gitignore>.vscode/
+.idea/
+.DS_Store
+.run/
+archetypes/
+resources/
+themes/
+content/
+.hugo_build.lock
+hugo.toml
+</code></pre><blockquote><p><strong>说明</strong>:此配置的作用是 <strong>只上传 Hugo 生成的静态页面目录到 GitHub</strong>,其他源文件全部忽略。</p></blockquote><hr><h2 id=五cloudflare-部署设置>五、Cloudflare 部署设置<a hidden class=anchor aria-hidden=true href=#五cloudflare-部署设置>#</a></h2><ol><li>登录 Cloudflare,在控制台选择 <strong>Workers 和 Pages</strong> → <strong>创建应用程序</strong></li><li>点击 <strong>Continue with GitHub</strong></li><li>授权 GitHub 账号并选择对应仓库即可</li></ol><p>部署完成后,Cloudflare 会自动监听仓库变动并发布到全球 CDN 节点。</p><hr><h2 id=六日常更新流程>六、日常更新流程<a hidden class=anchor aria-hidden=true href=#六日常更新流程>#</a></h2><h3 id=1-新建文章>1. 新建文章<a hidden class=anchor aria-hidden=true href=#1-新建文章>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span><span style=color:#66d9ef>cd</span> /d D:\hugo\kxops.com
 </span></span><span style=display:flex><span>hugo new posts/我的文章.md
-</span></span></code></pre></div><p>然后使用vscode或者自已喜欢的markdown编辑器 编写D:\hugo\kxops.com\posts\我的文章.md 保存即可
-更新到github 使用如下指令</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span><span style=color:#66d9ef>cd</span> /d D:\hugo\kxops.com
+</span></span></code></pre></div><h3 id=2-编写内容>2. 编写内容<a hidden class=anchor aria-hidden=true href=#2-编写内容>#</a></h3><p>用 VS Code 或其他 Markdown 编辑器打开 <code>D:\hugo\kxops.com\posts\我的文章.md</code>,编辑后保存。</p><h3 id=3-构建并推送>3. 构建并推送<a hidden class=anchor aria-hidden=true href=#3-构建并推送>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-cmd data-lang=cmd><span style=display:flex><span><span style=color:#66d9ef>cd</span> /d D:\hugo\kxops.com
 </span></span><span style=display:flex><span><span style=color:#66d9ef>rd</span> /s /q public resources .hugo_build.lock
 </span></span><span style=display:flex><span>hugo --minify --gc --cleanDestinationDir --baseURL <span style=color:#e6db74>&#34;https://kxops.com/&#34;</span>
 </span></span><span style=display:flex><span>git add .
 </span></span><span style=display:flex><span>git commit -m <span style=color:#e6db74>&#34;更新&#34;</span>
 </span></span><span style=display:flex><span>git push origin main
-</span></span></code></pre></div><p>至此 全文完&mldr;</p></div><footer class=post-footer><ul class=post-tags></ul></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://kxops.com/>kxops</a></span> ·
+</span></span></code></pre></div><p>推送完成后,Cloudflare 会自动重新部署,<strong>通常几十秒内即可在 <a href=https://kxops.com>kxops.com</a> 看到更新</strong>。</p><hr><p><strong>至此,全文完。</strong> 🎉</p></div><footer class=post-footer><ul class=post-tags></ul></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://kxops.com/>kxops</a></span> ·
 <span>Powered by
 <a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
 <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>

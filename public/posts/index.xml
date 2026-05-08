@@ -1,35 +1,63 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on kxops</title><link>https://kxops.com/posts/</link><description>Recent content in Posts on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 07 May 2026 21:12:42 +0800</lastBuildDate><atom:link href="https://kxops.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>hugo 静态站搭建于Github 运行Cloudflare Workers</title><link>https://kxops.com/posts/hugo-on-github-cloudflare/</link><pubDate>Thu, 07 May 2026 21:12:42 +0800</pubDate><guid>https://kxops.com/posts/hugo-on-github-cloudflare/</guid><description>&lt;h2 id="本站-kxopscom-运行方式"&gt;本站 kxops.com 运行方式&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;建站系统&lt;/strong&gt;: Hugo&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;网站存放&lt;/strong&gt;: Github&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;网站运行&lt;/strong&gt;: Cloudflare Workers&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;使用vscode 作为markdown 编写器
-除了域名外 全部免费 由全球最具生产力软件开发协作平台 Github.com 及 全球最大的网络服务商 Cloudflare.com (人称赛博活佛) 提供加速动力。&lt;/p&gt;
-&lt;p&gt;Cloudflare.com 开通Workers 和 Pages 需要绑银联卡 只需要验证 无费用产生 每日可有10万次点击 免费版详细说明 &lt;a href="https://www.cloudflare.com/zh-cn/plans/developer-platform/"&gt;https://www.cloudflare.com/zh-cn/plans/developer-platform/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Github 只需要注册即可&lt;/p&gt;
-&lt;p&gt;安装部署流程如下&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on kxops</title><link>https://kxops.com/posts/</link><description>Recent content in Posts on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 07 May 2026 21:12:42 +0800</lastBuildDate><atom:link href="https://kxops.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers</title><link>https://kxops.com/posts/hugo-on-github-cloudflare/</link><pubDate>Thu, 07 May 2026 21:12:42 +0800</pubDate><guid>https://kxops.com/posts/hugo-on-github-cloudflare/</guid><description>&lt;h2 id="一本站-kxopscom-运行架构"&gt;一、本站 kxops.com 运行架构&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;环节&lt;/th&gt;
+&lt;th&gt;所用服务&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;建站系统&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;编辑工具&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://code.visualstudio.com/"&gt;VS Code&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;网站托管&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://github.com/"&gt;GitHub&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;网站运行&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href="https://workers.cloudflare.com/"&gt;Cloudflare Workers&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;除域名外,全部 &lt;strong&gt;免费&lt;/strong&gt;。由全球最具生产力的软件协作平台 &lt;strong&gt;GitHub&lt;/strong&gt; 与全球最大的网络服务商 &lt;strong&gt;Cloudflare&lt;/strong&gt;(人称&amp;quot;赛博活佛&amp;quot;)提供加速动力。&lt;/p&gt;
 &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;费用提示&lt;/strong&gt;
+Cloudflare 开通 Workers 和 Pages 需要绑定银联卡,&lt;strong&gt;仅用于身份验证,不产生任何费用&lt;/strong&gt;。免费版每日可承接 10 万次请求,详见 &lt;a href="https://www.cloudflare.com/zh-cn/plans/developer-platform/"&gt;Cloudflare 开发者平台方案&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;GitHub 只需要注册账号即可使用。&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="二部署流程总览"&gt;二、部署流程总览&lt;/h2&gt;
+&lt;p&gt;整个发布链路分三步:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;本地电脑安装 hugo 部署文档&lt;/li&gt;
-&lt;li&gt;产生的文档生成后 通过git push public变动推送到 github.com&lt;/li&gt;
-&lt;li&gt;cloudflare监控 github.com/kx-ops/kxops.com 变动更新网站&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;本地生成&lt;/strong&gt; — 在本地电脑用 Hugo 构建静态文档&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;推送仓库&lt;/strong&gt; — 通过 &lt;code&gt;git push&lt;/code&gt; 将 &lt;code&gt;public/&lt;/code&gt; 目录推送到 GitHub&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动部署&lt;/strong&gt; — Cloudflare 监听 &lt;code&gt;github.com/kx-ops/kxops.com&lt;/code&gt; 的变动,自动更新网站&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id="本地电脑安装-hugo-及使用过程"&gt;本地电脑安装 hugo 及使用过程&lt;/h3&gt;
-&lt;p&gt;安装最新Windows版 hugo 下载地址
-&lt;a href="https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip"&gt;https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;安装windows 版 git
-&lt;a href="https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe"&gt;https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;打开环境变量设置
-点击 Windows 开始菜单，直接输入 “环境变量”。
-选择 “编辑系统环境变量”&lt;/p&gt;
-&lt;p&gt;在弹出的窗口中，点击右下角的 “环境变量” 按钮。
-第三步：修改 Path 变量
-在“系统变量” 栏中，找到名为 Path 的变量，双击它。
-在弹出的窗口右侧点击 “新建”。
-将你第一步复制的d:\Hugo 文件夹路径 粘贴进去。
-依次点击 “确定” 保存所有窗口。&lt;/p&gt;</description></item><item><title>Argocd 简述及使用 上</title><link>https://kxops.com/posts/about-argocd/</link><pubDate>Wed, 06 May 2026 23:14:04 +0800</pubDate><guid>https://kxops.com/posts/about-argocd/</guid><description>&lt;p&gt;ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;[本地 Hugo] ──git push──▶ [GitHub 仓库] ──webhook──▶ [Cloudflare Workers]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="三本地电脑安装-hugo"&gt;三、本地电脑安装 Hugo&lt;/h2&gt;
+&lt;h3 id="1-下载安装包"&gt;1. 下载安装包&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Hugo(Windows)&lt;/strong&gt;:&lt;a href="https://github.com/gohugoio/hugo/releases/download/v0.161.1/hugo_0.161.1_windows-amd64.zip"&gt;hugo_0.161.1_windows-amd64.zip&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Git(Windows)&lt;/strong&gt;:&lt;a href="https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe"&gt;Git-2.54.0-64-bit.exe&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-配置-hugo-环境变量"&gt;2. 配置 Hugo 环境变量&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;点击 Windows 开始菜单,输入 &lt;strong&gt;&amp;ldquo;环境变量&amp;rdquo;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;选择 &lt;strong&gt;&amp;ldquo;编辑系统环境变量&amp;rdquo;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;在弹出窗口中,点击右下角 &lt;strong&gt;&amp;ldquo;环境变量&amp;rdquo;&lt;/strong&gt; 按钮&lt;/li&gt;
+&lt;li&gt;在&amp;quot;系统变量&amp;quot;栏中,找到 &lt;strong&gt;Path&lt;/strong&gt; 变量并双击&lt;/li&gt;
+&lt;li&gt;在右侧点击 &lt;strong&gt;&amp;ldquo;新建&amp;rdquo;&lt;/strong&gt;,粘贴 Hugo 所在目录,例如 &lt;code&gt;D:\Hugo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;依次点击 &lt;strong&gt;&amp;ldquo;确定&amp;rdquo;&lt;/strong&gt; 保存全部窗口&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="3-创建第一个站点"&gt;3. 创建第一个站点&lt;/h3&gt;
+&lt;p&gt;打开命令提示符,依次执行:&lt;/p&gt;</description></item><item><title>Argocd 简述及使用 上</title><link>https://kxops.com/posts/about-argocd/</link><pubDate>Wed, 06 May 2026 23:14:04 +0800</pubDate><guid>https://kxops.com/posts/about-argocd/</guid><description>&lt;p&gt;ArgoCD 专为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。使用 Git 仓库更改时自动同步和部署应用程序。
 &lt;img alt="argocd 架构图" loading="lazy" src="https://cdn.shortpixel.ai/spai/w_1248+q_lossless+ret_img+to_webp/www.apptio.com/wp-content/uploads/argocd-arch.png"&gt;&lt;/p&gt;
 &lt;h4 id="官方说明"&gt;官方说明&lt;/h4&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;Why Argo CD? 为什么选择 ArgoCD

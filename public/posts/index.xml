@@ -1,35 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on kxops</title><link>https://kxops.com/posts/</link><description>Recent content in Posts on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 08 May 2026 10:00:00 +0800</lastBuildDate><atom:link href="https://kxops.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>ArgoCD 简述及使用 下 —— 连接 GitHub、创建 App、版本回滚</title><link>https://kxops.com/posts/argocd-basic-usage/</link><pubDate>Fri, 08 May 2026 10:00:00 +0800</pubDate><guid>https://kxops.com/posts/argocd-basic-usage/</guid><description>&lt;p&gt;上一篇 &lt;a href="https://kxops.com/posts/about-argocd/"&gt;《Argocd 简述及使用 上》&lt;/a&gt; 介绍了 ArgoCD 的架构、核心概念和安装方法。本篇承接上文,讲三件最常用的事:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;连接 GitHub 仓库&lt;/strong&gt;(含私有仓库)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;基于仓库里的 manifest 目录创建 Application&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;版本回滚 Rollback&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="一准备工作"&gt;一、准备工作&lt;/h2&gt;
-&lt;p&gt;假设你已按上一篇完成了 ArgoCD 安装。先确认服务在线:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl get pods -n argocd
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;暴露 ArgoCD Server&lt;/p&gt;
-&lt;p&gt;本地测试最简单的方式是端口转发:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kubectl port-forward svc/argocd-server -n argocd 8080:443
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;浏览器打开 &lt;a href="https://localhost:8080"&gt;https://localhost:8080&lt;/a&gt; 即可访问 UI。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="二连接-github-仓库"&gt;二、连接 GitHub 仓库&lt;/h2&gt;
-&lt;p&gt;ArgoCD 支持两种仓库连接方式:&lt;strong&gt;公开仓库&lt;/strong&gt;(无需凭证)和&lt;strong&gt;私有仓库&lt;/strong&gt;(需 SSH 或 HTTPS 凭证)。&lt;/p&gt;
-&lt;h3 id="方式-1公开仓库最简单"&gt;方式 1:公开仓库(最简单)&lt;/h3&gt;
-&lt;p&gt;UI 操作:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;左侧菜单 &lt;strong&gt;Settings&lt;/strong&gt; → &lt;strong&gt;Repositories&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;点击 &lt;strong&gt;+ CONNECT REPO&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;选择 &lt;strong&gt;VIA HTTPS&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;填写:
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Type&lt;/strong&gt;:&lt;code&gt;git&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Repository URL&lt;/strong&gt;:&lt;code&gt;https://github.com/你的用户名/你的仓库.git&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;点击 &lt;strong&gt;CONNECT&lt;/strong&gt;,状态变为 &lt;strong&gt;Successful&lt;/strong&gt; 即完成&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;CLI 方式:&lt;/p&gt;</description></item><item><title>Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers</title><link>https://kxops.com/posts/hugo-on-github-cloudflare/</link><pubDate>Thu, 07 May 2026 21:12:42 +0800</pubDate><guid>https://kxops.com/posts/hugo-on-github-cloudflare/</guid><description>&lt;h2 id="一本站-kxopscom-运行架构"&gt;一、本站 kxops.com 运行架构&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on kxops</title><link>https://kxops.com/posts/</link><description>Recent content in Posts on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 07 May 2026 21:12:42 +0800</lastBuildDate><atom:link href="https://kxops.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo 静态站搭建于 GitHub,运行于 Cloudflare Workers</title><link>https://kxops.com/posts/hugo-on-github-cloudflare/</link><pubDate>Thu, 07 May 2026 21:12:42 +0800</pubDate><guid>https://kxops.com/posts/hugo-on-github-cloudflare/</guid><description>&lt;h2 id="一本站-kxopscom-运行架构"&gt;一、本站 kxops.com 运行架构&lt;/h2&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;

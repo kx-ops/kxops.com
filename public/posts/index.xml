@@ -76,7 +76,7 @@ Cloudflare 开通 Workers 和 Pages 需要绑定银联卡,&lt;strong&gt;仅用�
 &lt;li&gt;RBAC&lt;/li&gt;
 &lt;li&gt;Git webhook 事件的侦听器/转发器&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：&lt;/p&gt;</description></item><item><title>GitOps 基本知识入门笔记</title><link>https://kxops.com/posts/gitops%E9%8D%A9%E8%99%B9/</link><pubDate>Sat, 02 May 2026 09:51:53 +0800</pubDate><guid>https://kxops.com/posts/gitops%E9%8D%A9%E8%99%B9/</guid><description>&lt;p&gt;&lt;img alt="GitOps" loading="lazy" src="https://learn.microsoft.com/ko-kr/azure/architecture/example-scenario/gitops-aks/media/gitops-ci-cd-argo-cd.png" title="GitOps流程示意图"&gt;
+&lt;p&gt;二. 仓库服务：存储仓库服务是一个内部服务，负责维护保存应用程序清单 Git 仓库的本地缓存。当提供以下输入时，它负责生成并返回 Kubernetes 清单：&lt;/p&gt;</description></item><item><title>GitOps 基本知识入门笔记</title><link>https://kxops.com/posts/gitops-base/</link><pubDate>Sat, 02 May 2026 09:51:53 +0800</pubDate><guid>https://kxops.com/posts/gitops-base/</guid><description>&lt;p&gt;&lt;img alt="GitOps" loading="lazy" src="https://learn.microsoft.com/ko-kr/azure/architecture/example-scenario/gitops-aks/media/gitops-ci-cd-argo-cd.png" title="GitOps流程示意图"&gt;
 GitOps 是一种基于 Git 仓库来管理 Kubernetes 集群和应用程序交付的现代化 DevOps 实践。核心是将 Git 作为基础设施和应用配置的“唯一源”，通过声明式（YAML）描述期望状态，利用 Git 的版本控制特性实现自动化拉取（Pull）和持续部署。主流工具为 Argo CD 和 Flux。&lt;/p&gt;
 &lt;h3 id="gitops-的核心原则声明式"&gt;GitOps 的核心原则声明式：&lt;/h3&gt;
 &lt;ol&gt;
@@ -100,7 +100,7 @@ GitOps 是一种基于 Git 仓库来管理 Kubernetes 集群和应用程序交�
 &lt;li&gt;一致性：确保 Git 记录即生产环境状态&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id="gitops-历史"&gt;GitOps 历史&lt;/h3&gt;
-&lt;p&gt;Git 是用于软件开发的关键任务工具，支持拉取请求和代码审查工作流程。拉取请求可提高代码库传入变更的可见性，并鼓励针对变更进行沟通、讨论和审查。&lt;/p&gt;</description></item><item><title>k8s使用 Letsencrypt 和 Traefik 实现 https 自动部署</title><link>https://kxops.com/posts/k3s-%E6%B5%A3%E8%B7%A8%E6%95%A4-letsencrypt%E9%8D%9C%E5%AD%B4raefik%E7%80%B9%E5%B1%BE%E5%9E%9Ahttps%E9%91%B7%E5%A7%A9%E9%96%AE%E3%84%A7%E8%AE%B2/</link><pubDate>Fri, 01 May 2026 16:50:13 +0800</pubDate><guid>https://kxops.com/posts/k3s-%E6%B5%A3%E8%B7%A8%E6%95%A4-letsencrypt%E9%8D%9C%E5%AD%B4raefik%E7%80%B9%E5%B1%BE%E5%9E%9Ahttps%E9%91%B7%E5%A7%A9%E9%96%AE%E3%84%A7%E8%AE%B2/</guid><description>&lt;p&gt;k3s 使用 Letsencrypt 和 Traefik 完成 https 入口部署&lt;/p&gt;
+&lt;p&gt;Git 是用于软件开发的关键任务工具，支持拉取请求和代码审查工作流程。拉取请求可提高代码库传入变更的可见性，并鼓励针对变更进行沟通、讨论和审查。&lt;/p&gt;</description></item><item><title>k8s使用 Letsencrypt 和 Traefik 实现 https 自动部署</title><link>https://kxops.com/posts/k8s-letsencrypt-traefik-https-/</link><pubDate>Fri, 01 May 2026 16:50:13 +0800</pubDate><guid>https://kxops.com/posts/k8s-letsencrypt-traefik-https-/</guid><description>&lt;p&gt;k3s 使用 Letsencrypt 和 Traefik 完成 https 入口部署&lt;/p&gt;
 &lt;h3 id="内容提要"&gt;内容提要&lt;/h3&gt;
 &lt;p&gt;本文介绍 cert-manager 插件的安装，之后以一个简单的 web 服务部署为例，演示 https 服务的部署过程。&lt;/p&gt;
 &lt;p&gt;安装 cert-manager&lt;/p&gt;

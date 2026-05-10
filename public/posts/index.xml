@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on kxops</title><link>https://kxops.com/posts/</link><description>Recent content in Posts on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 10 May 2026 17:13:12 +0800</lastBuildDate><atom:link href="https://kxops.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows 11 Wsl Bridged</title><link>https://kxops.com/posts/windows-wsl-bridged/</link><pubDate>Sun, 10 May 2026 17:13:12 +0800</pubDate><guid>https://kxops.com/posts/windows-wsl-bridged/</guid><description>&lt;p&gt;&lt;img alt="示意图" loading="lazy" src="https://kxops.com/content/img/w11-wsl-bridged.jpeg" title="w11-wsl-bridged"&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on kxops</title><link>https://kxops.com/posts/</link><description>Recent content in Posts on kxops</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 10 May 2026 17:13:12 +0800</lastBuildDate><atom:link href="https://kxops.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows 11 Wsl Bridged</title><link>https://kxops.com/posts/windows-wsl-bridged/</link><pubDate>Sun, 10 May 2026 17:13:12 +0800</pubDate><guid>https://kxops.com/posts/windows-wsl-bridged/</guid><description>&lt;p&gt;&lt;img alt="示意图" loading="lazy" src="https://kxops.com/img/w11-wsl-bridged.jpeg" title="w11-wsl-bridged"&gt;&lt;/p&gt;
 &lt;p&gt;实测在 Windows11 25H2, WSL version 2.6.3 Ubuntu 26.04 下有效&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;设置桥接 安装hyper-V 设置桥接
-&lt;img alt="示意图" loading="lazy" src="https://kxops.com/content/img/w11-wsl-bridged-1.jpeg" title="w11-wsl-bridged"&gt;&lt;/p&gt;
+&lt;img alt="示意图" loading="lazy" src="https://kxops.com/img/w11-wsl-bridged-1.jpeg" title="w11-wsl-bridged"&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;通过.wslconfig设置 WSL2 网络模式为 bridged&lt;/p&gt;

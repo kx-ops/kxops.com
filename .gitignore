@@ -16,3 +16,4 @@ hugo.toml
 .env*
 !.env.example
 wrangler.jsonc
+.claude/settings.local.json
